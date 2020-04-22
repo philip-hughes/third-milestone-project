@@ -43,6 +43,13 @@ def addAppointment(time, appointmentId):
 
 @app.route("/updateAppointment", methods=["POST"])
 def update_appointment():
+    appointments = mongo.db.appointments
+    appointments.update({'_id': ObjectId(request.form.get('appointmentId'))},
+                        {"$push": {"appointment_list": {"doctor_id": "5e8f51b51c9d440000598471",
+                                                        "type": "patient",
+                                                        "patient_id": request.form.get("patient_id")}}}
+                        )
+
     return redirect(url_for('index'))
 
 

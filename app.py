@@ -40,9 +40,11 @@ def addAppointment(time, appointmentId):
     patients = mongo.db.patients.find({"doctor_id": doctor})
     return render_template("addAppointment.html", time=time, appointmentId=appointmentId, patients=patients)
 
+
 @app.route("/updateAppointment")
-def updateAppointment():
-    return return redirect(url_for('index'))
+def update_appointment():
+    return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

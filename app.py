@@ -41,7 +41,7 @@ def addAppointment(time, appointmentId):
     return render_template("addAppointment.html", time=time, appointmentId=appointmentId, patients=patients)
 
 
-@app.route("/updateAppointment")
+@app.route("/updateAppointment", methods=["POST"])
 def update_appointment():
     return redirect(url_for('index'))
 

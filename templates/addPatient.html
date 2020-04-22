@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+
+<form action="{{url_for('insert_patient')}}" method="POST">
+<label for="first_name">First name</label></br>
+<input id="first_name" type="text" name="first_name"></br>
+<label for="last_name">Last name</label></br>
+<input id="last_name" type="text" name="last_name"></br>
+<label for="dob">Date of birth</label></br>
+<input id="dob" type="text" name="dob"></br>
+<label for="doctor">Doctor</label></br>
+<input id="doctor" type="text" name="doctor"></br>
+<input name="scheduled_appointment" type="hidden" value=""></br>
+<input name="last_appointment" type="hidden" value=""></br>
+<button>Submit</button>
+</form>
+
+{% endblock %}

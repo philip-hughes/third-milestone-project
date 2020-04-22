@@ -29,8 +29,11 @@ def index():
         else:
             new_appointments.append({"id": appointment["_id"], "time":appointment["time"], "empty": True})
 
-    return render_template("index.html", slots = new_appointments )
+    return render_template("index.html", slots = new_appointments)
 
+@app.route('/addAppointment.html/<appointmentId>/<time>')
+def addAppointment(time, appointmentId):
+    return render_template('addAppointment.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

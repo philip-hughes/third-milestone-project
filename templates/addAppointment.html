@@ -1,0 +1,7 @@
+{% extends "base.html" %} {% block content %}
+<form action="" method="POST">
+<input name="appointmentId" type="hidden" value={{appointmentId}}>
+<input type="text" name="time" value={{time}} disabled>
+<button type="submit" name="action">Add appointment</button>
+</form>
+{% endblock %}

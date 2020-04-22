@@ -6,6 +6,9 @@
    <li> {{item.time}}
         {{item.patient["first_name"]}}
    </li>
+    {% else %}
+    <li> {{item.time}}
+   </li>
     {% endif %}
 {% endfor %}
 

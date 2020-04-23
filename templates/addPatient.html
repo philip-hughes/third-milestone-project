@@ -8,7 +8,11 @@
 <label for="dob">Date of birth</label></br>
 <input id="dob" type="text" name="dob"></br>
 <label for="doctor">Doctor</label></br>
-<input id="doctor" type="text" name="doctor"></br>
+    <select id="doctor" class="js-example-basic-single" name="doctor_id">
+        {% for doctor in doctors %}
+    <option value={{doctor._id}}>{{doctor.first_name}}</option>
+    {% endfor %}
+</select>
 <input name="scheduled_appointment" type="hidden" value=""></br>
 <input name="last_appointment" type="hidden" value=""></br>
 <button>Submit</button>

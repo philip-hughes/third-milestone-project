@@ -66,8 +66,8 @@ def remove_appointment(appointmentId):
 
 @app.route('/addPatient')
 def addPatient():
-
-    return render_template('addPatient.html')
+    doctors = mongo.db.doctors.find()
+    return render_template('addPatient.html', doctors=doctors)
 
 
 @app.route('/insert_patient', methods=["POST"])

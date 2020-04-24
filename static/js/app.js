@@ -4,4 +4,9 @@ $(document).ready(function() {
         const url = "/remove_appointment/".concat(id);
         location.href=url;
         })
+
+    $('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
 });

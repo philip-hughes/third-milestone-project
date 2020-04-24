@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+        {% for item in slots %}
+            {% if item.empty != True %}
+                <li> {{item.time}}
+                    {{item.patient["first_name"]}}
+                </li>
+            <button class="remove" data-id={{item.id}}>Remove appointment</button>
+            {% else %}
+                <a href="{{url_for('addAppointment', appointmentId=item.id, time=item.time)}}">
+                    <li> {{item.time}}</li></a></li>
+    {% endif %}
+{% endfor %}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">Bye bye</div>
+
+  </div>
+
+</div>
+{% endblock %}

@@ -1,7 +1,4 @@
 {% extends 'base.html' %} {% block content %}
-
-<div>
-
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
@@ -10,20 +7,72 @@
     <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
   </ul>
 
+
+
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home">
-        {% for item in slots %}
-            {% if item.empty != True %}
-                <li> {{item.time}}
-                    {{item.patient["first_name"]}}
-                </li>
-            <button class="remove" data-id={{item.id}}>Remove appointment</button>
-            {% else %}
-                <a href="{{url_for('addAppointment', appointmentId=item.id, time=item.time)}}">
-                    <li> {{item.time}}</li></a></li>
-    {% endif %}
-{% endfor %}
+            {% for hour in hours %}
+    <div class="row no-gutters">
+        <div class="col-2">{{hour.hour}}</div>
+            <div class="col-10">
+                <div class="row no-gutters hour">
+                    {% if hour.slots[0].empty == True %}
+                    <div class="col-6">
+                        <span>{{hour.slots[0].time}}</span>
+                        <a href="{{url_for('addAppointment', appointmentId=hour.id, time=hour.slots[0].time)}}">Make appointment</a>
+                    </div>
+                    {% else %}
+                    <div class="col-6">
+                        <span>{{hour.slots[0].time}}</span>
+                        <span>{{hour.slots[0].patient.first_name}}</span>
+                        <button class="remove" data-id={{hour.id}}>Cancel</button>
+                    </div>
+                    {% endif %}
+                    {% if hour.slots[1].empty == True %}
+                    <div class="col-6">
+                        <span>{{hour.slots[1].time}}</span>
+                        <a href="{{url_for('addAppointment', appointmentId=hour.id, time=hour.slots[1].time)}}">Make appointment</a>
+                    </div>
+                    {% else %}
+                    <div class="col-6">
+                        <span>{{hour.slots[1].time}}</span>
+                        <span>{{hour.slots[1].patient.first_name}}</span>
+                        <button class="remove" data-id={{hour.id}}>Remove appointment</button>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="row no-gutters hour">
+                    {% if hour.slots[2].empty == True %}
+                    <div class="col-6">
+                        <span>{{hour.slots[2].time}}</span>
+                        <a href="{{url_for('addAppointment', appointmentId=hour.id, time=hour.slots[2].time)}}">Make appointment</a>
+                    </div>
+                    {% else %}
+                    <div class="col-6">
+                        <span>{{hour.slots[2].time}}</span>
+                        <span>{{hour.slots[2].patient.first_name}}</span>
+                        <button class="remove" data-id={{hour.id}}>Remove appointment</button>
+                    </div>
+                    {% endif %}
+                    {% if hour.slots[3].empty == True %}
+                    <div class="col-6">
+                        <span>{{hour.slots[3].time}}</span>
+                        <a href="{{url_for('addAppointment', appointmentId=hour.id, time=hour.slots[3].time)}}">Make appointment</a>
+                    </div>
+                    {% else %}
+                    <div class="col-6">
+                        <span>{{hour.slots[3].time}}</span>
+                        <span>{{hour.slots[3].patient.first_name}}</span>
+                        <button class="remove" data-id={{hour.id}}>Remove appointment</button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    <div>
+    {% endfor %}
+
     </div>
     <div role="tabpanel" class="tab-pane" id="profile">Bye bye</div>
 

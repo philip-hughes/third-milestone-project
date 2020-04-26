@@ -86,7 +86,6 @@ def insert_patient():
 def get_appointments(date, doctor_id):
     filtered_appointments = []
     slot = mongo.db.slots.find_one({"date": date})
-    print('slot ', slot)
     appointment_ids = slot["appointment_ids"]
     print("appointment_ids ", appointment_ids)
     for appointment_id in appointment_ids:
@@ -96,10 +95,16 @@ def get_appointments(date, doctor_id):
         })
         print("appointment ", appointment)
         if appointment is not None:
+            patient = mongo.db.patients.find_one({"_id": ObjectId(appointment['patient_id'])})
+            print("patient", patient)
+            appointment.update({'patient_details': patient})
             filtered_appointments.append(appointment)
-
+    print("filtered appointments", filtered_appointments)
     return filtered_appointments
 
+
+appts = get_appointments("26/04/2020", '5ea578ecd869174818f2c620')
+print("Filtered appointments: ", appts)
 
 if __name__ == '__main__':
     app.run(debug=True)

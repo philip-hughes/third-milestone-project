@@ -22,11 +22,11 @@ def index():
     for hour in hours:
         slots = []
         for time_obj in hour["appointment_list"]:
-            print("timeobj ", time_obj)
+
             if len(time_obj["appointments"]) != 0:
-                print("time_obj apps", time_obj["appointments"])
+
                 test = next((item for item in time_obj["appointments"] if item["doctor_id"] == doctor), None)
-                if test != None:
+                if test is not None:
                     patient = mongo.db.patients.find_one({"_id": ObjectId(test["patient_id"])})
                     slots.append(
                         {"time": time_obj["time"], "patient": patient, "empty": False})
@@ -83,6 +83,47 @@ def insert_patient():
     return redirect(url_for('index'))
 
 
+def build_calendar(date, doctor_id):
+    calendar = []
+    hours = [{"hour": "09:00", "times": ["09:00", "09:15", "09:30", "09:45"]},
+             {"hour": "10:00", "times": ["10:00", "10:15", "10:30", "10:45"]},
+             {"hour": "11:00", "times": ["11:00", "11:15", "11:30", "11:45"]},
+             {"hour": "12:00", "times": ["12:00", "12:15", "12:30", "12:45"]},
+             {"hour": "13:00", "times": ["13:00", "13:15", "13:30", "13:45"]},
+             {"hour": "14:00", "times": ["14:00", "14:15", "14:30", "14:45"]}]
+
+    appointments = get_appointments(date, doctor_id)
+    print("Returned from getAppointments:", appointments )
+    for hour in hours:
+        appointment_times = []
+        for i in range(4):
+            time = hour["times"][i]
+            appointment = search_appointments(appointments, time)
+            print('Returned from searchAppointments: ', appointment)
+            if appointment is not None:
+                appointment_times.append({time: [{"empty": False,
+                                                  "appointment_id": appointment["_id"],
+                                                  "patient_id": appointment["patient_id"],
+                                                  "patient_name": appointment["patient_details"]["name"]}]})
+            else:
+                appointment_times.append({time: [{"empty": True}]})
+
+        calendar.append({"hour": hour["hour"], "times": appointment_times})
+
+    return calendar
+
+
+def search_appointments(appointments, time):
+    for appointment in appointments:
+        print("Search appointments recieved appointment:", appointment)
+        times = appointment["times"]
+        test = next((item for item in times if item["time"] == time), None)
+        if test is not None:
+            return appointment
+
+    return None
+
+
 def get_appointments(date, doctor_id):
     filtered_appointments = []
     slot = mongo.db.slots.find_one({"date": date})
@@ -96,15 +137,13 @@ def get_appointments(date, doctor_id):
         print("appointment ", appointment)
         if appointment is not None:
             patient = mongo.db.patients.find_one({"_id": ObjectId(appointment['patient_id'])})
-            print("patient", patient)
             appointment.update({'patient_details': patient})
             filtered_appointments.append(appointment)
-    print("filtered appointments", filtered_appointments)
     return filtered_appointments
 
 
-appts = get_appointments("26/04/2020", '5ea578ecd869174818f2c620')
-print("Filtered appointments: ", appts)
+calendar = build_calendar("27/04/2020", '5ea578ecd869174818f2c620')
+print("Calendar: ", calendar)
 
 if __name__ == '__main__':
     app.run(debug=True)

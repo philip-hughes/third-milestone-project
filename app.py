@@ -16,28 +16,10 @@ mongo = PyMongo(app)
 @app.route('/')
 def index():
     today = datetime.now().strftime("%d/%m/%Y")
-    doctor = "5e8f51b51c9d440000598471"
-    hours = mongo.db.appointments.find({"date": today})
-    filtered_hours = []
-    for hour in hours:
-        slots = []
-        for time_obj in hour["appointment_list"]:
+    doctor = "5ea578ecd869174818f2c620"
+    calendar = build_calendar(today, doctor)
 
-            if len(time_obj["appointments"]) != 0:
-
-                test = next((item for item in time_obj["appointments"] if item["doctor_id"] == doctor), None)
-                if test is not None:
-                    patient = mongo.db.patients.find_one({"_id": ObjectId(test["patient_id"])})
-                    slots.append(
-                        {"time": time_obj["time"], "patient": patient, "empty": False})
-                else:
-                    slots.append({"time": time_obj["time"], "empty": True})
-            else:
-                slots.append({"time": time_obj["time"], "empty": True})
-
-        filtered_hours.append({"id": hour["_id"], "hour": hour["hour"], "slots": slots})
-        print("hours", filtered_hours)
-    return render_template("index.html", hours=filtered_hours)
+    return render_template("index.html", calendar=calendar)
 
 
 @app.route('/addAppointment/<appointmentId>/<time>', methods=["POST", "GET"])
@@ -62,7 +44,7 @@ def update_appointment():
 @app.route("/remove_appointment/<appointmentId>")
 def remove_appointment(appointmentId):
     print("appId", appointmentId)
-    doctor = "5e8f51b51c9d440000598471"
+    doctor = "5ea578ecd869174818f2c620"
     appointments = mongo.db.appointments
     appointments.update({'_id': ObjectId(appointmentId)},
                         {"$pull": {"appointment_list": {"doctor_id": doctor}}}
@@ -141,9 +123,6 @@ def get_appointments(date, doctor_id):
             filtered_appointments.append(appointment)
     return filtered_appointments
 
-
-calendar = build_calendar("27/04/2020", '5ea578ecd869174818f2c620')
-print("Calendar: ", calendar)
 
 if __name__ == '__main__':
     app.run(debug=True)

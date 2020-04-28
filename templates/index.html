@@ -4,15 +4,17 @@
                 <div class="col-2 hour">{{hour.hour}}</div>
             	<div class="col-10">
                 {% for time in hour.times %}
+                    {% if time.empty == True %}
                     <div class="row no-gutters slot">
-                    	{% if time.empty == True %}
-                        		<span>{{time.time}}</span>
-                        		<a href="{{url_for('addAppointment', appointmentId=time.appointment_id, time=time.time)}}">Make</a>
-                    	{% else %}
+                        <span>{{time.time}}</span>
+                        <a href="{{url_for('addAppointment', appointmentId=time.appointment_id, time=time.time)}}">Make</a>
+                    </div>
+                    {% else %}
+                        <div class="row no-gutters slot">
                         	<span>{{time.time}}</span>
                         	<span>{{time.patient_name}}</span>
-                        {% endif %}
-                    </div>
+                        </div>
+                    {% endif %}
                 {% endfor %}
                 </div>
 			</div>

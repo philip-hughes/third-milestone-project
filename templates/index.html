@@ -11,11 +11,11 @@
                     </div>
                     {% else %}
                     {% if time.first_time == True %}
-                        <div class="row no-gutters slot first-time}}">
+                        <div class="row no-gutters slot first-time" data-id={{ time.appointment_id }}>
                         {%  elif time.last_time == True %}
-                            <div class="row no-gutters slot last-time}}">
+                            <div class="row no-gutters slot last-time"  data-id={{ time.appointment_id }}>
                             {% else %}
-                                <div class="row no-gutters slot}}">
+                                <div class="row no-gutters slot" data-id={{ time.appointment_id }}>
                     {% endif %}
                         	<span>{{time.time}}</span>
                         	<span>{{time.patient_name}}</span>

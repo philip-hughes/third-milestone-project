@@ -7,7 +7,6 @@
                     {% if time.empty == True %}
                     <div class="row no-gutters slot">
                         <span>{{time.time}}</span>
-                        <a href="{{url_for('addAppointment', appointmentId=time.appointment_id, time=time.time)}}">Make</a>
                     </div>
                     {% else %}
                     {% if time.first_time == True %}

@@ -10,7 +10,13 @@
                         <a href="{{url_for('addAppointment', appointmentId=time.appointment_id, time=time.time)}}">Make</a>
                     </div>
                     {% else %}
-                        <div class="row no-gutters slot">
+                    {% if time.first_time == True %}
+                        <div class="row no-gutters slot first-time}}">
+                        {%  elif time.last_time == True %}
+                            <div class="row no-gutters slot last-time}}">
+                            {% else %}
+                                <div class="row no-gutters slot}}">
+                    {% endif %}
                         	<span>{{time.time}}</span>
                         	<span>{{time.patient_name}}</span>
                         </div>

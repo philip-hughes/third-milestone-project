@@ -17,8 +17,8 @@ mongo = PyMongo(app)
 def index():
     today = datetime.now().strftime("%d/%m/%Y")
     doctor = "5ea578ecd869174818f2c620"
-    calendar = build_calendar(today, doctor)
-
+    calendar = build_calendar("27/04/2020", doctor)
+    print("Calendar: ", calendar)
     return render_template("index.html", calendar=calendar)
 
 
@@ -83,12 +83,16 @@ def build_calendar(date, doctor_id):
             appointment = search_appointments(appointments, time)
             print('Returned from searchAppointments: ', appointment)
             if appointment is not None:
-                appointment_times.append({time: [{"empty": False,
-                                                  "appointment_id": appointment["_id"],
-                                                  "patient_id": appointment["patient_id"],
-                                                  "patient_name": appointment["patient_details"]["name"]}]})
+                time_obj = next((item for item in appointment["times"] if item["time"] == time), None)
+                appointment_times.append({"time": time,
+                                          "empty": False,
+                                          "first_time": time_obj["first_time"],
+                                          "last_time": time_obj["last_time"],
+                                          "appointment_id": appointment["_id"],
+                                          "patient_id": appointment["patient_id"],
+                                          "patient_name": appointment["patient_details"]["name"]})
             else:
-                appointment_times.append({time: [{"empty": True}]})
+                appointment_times.append({"time": time, "empty": True})
 
         calendar.append({"hour": hour["hour"], "times": appointment_times})
 

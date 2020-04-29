@@ -36,14 +36,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url_for('update_appointment') }}" method="POST">
-            <input name="appointmentId" type="hidden" value={{appointmentId}}>
+        <form action="{{ url_for('insert_appointment') }}" method="POST">
             <select class="js-example-basic-single" name="patient_id">
             {% for patient in patients %}
             <option value={{patient._id}}>{{patient.name}}</option>
             {% endfor %}
             </select>
-            <input type="text" name="time" value={{time}} disabled>
+            <input type="text" name="time" value="12:00">
             <button type="submit" name="action">Add appointment</button>
 </form>
       </div>

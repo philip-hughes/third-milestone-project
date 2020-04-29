@@ -30,13 +30,22 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">New appointment</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <form action="{{ url_for('update_appointment') }}" method="POST">
+            <input name="appointmentId" type="hidden" value={{appointmentId}}>
+            <select class="js-example-basic-single" name="patient_id">
+            {% for patient in patients %}
+            <option value={{patient._id}}>{{patient.name}}</option>
+            {% endfor %}
+            </select>
+            <input type="text" name="time" value={{time}} disabled>
+            <button type="submit" name="action">Add appointment</button>
+</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

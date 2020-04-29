@@ -19,14 +19,23 @@ def index():
     doctor = "5ea578ecd869174818f2c620"
     calendar = build_calendar("27/04/2020", doctor)
     print("Calendar: ", calendar)
-    return render_template("index.html", calendar=calendar)
+    patients = mongo.db.patients.find()
+    return render_template("index.html", calendar=calendar, patients=patients)
 
+
+@app.route('/insert_appointment', methods=["POST"])
+def insert_appointment():
+    appointments = mongo.db.appointments
+    appointments.insert_one(request.form.to_dict())
+    return redirect(url_for('index'))
 
 @app.route('/addAppointment/<appointmentId>/<time>', methods=["POST", "GET"])
 def addAppointment(time, appointmentId):
     doctor = "5e8f51b51c9d440000598471"
     patients = mongo.db.patients.find({"doctor_id": doctor})
     return render_template("addAppointment.html", time=time, appointmentId=appointmentId, patients=patients)
+
+
 
 
 @app.route("/updateAppointment", methods=["POST"])

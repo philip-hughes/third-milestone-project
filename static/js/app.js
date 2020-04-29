@@ -26,15 +26,21 @@ $('#newAppointmentModal').on('show.bs.modal', function (event) {
     })
 
     const availableTimes = [];
+    const endTimeList = $("#endTime");
+    endTimeList.empty()
     for(i=0; i < otherSlots.length; i++){
         const slotTime = $(otherSlots[i]).data("time")
         const appointmentId = $(otherSlots[i]).data("id")
         if(!appointmentId){
+            $("#endTime").append(`<option value=${slotTime}>${slotTime}</option>`)
             availableTimes.push(slotTime)}
         else { break;}
           }
+
+
+
 })
-     });
+});
      /****test***
     var base = new Date("1980-01-01 09:30");
     var test = new Date("1980-01-01 08:30:01");

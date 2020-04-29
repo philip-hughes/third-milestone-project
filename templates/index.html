@@ -5,7 +5,7 @@
             	<div class="col-10">
                 {% for time in hour.times %}
                     {% if time.empty == True %}
-                    <div class="row no-gutters slot" data-toggle="modal" data-target="#newAppointmentModal">
+                    <div class="row no-gutters slot" data-toggle="modal" data-target="#newAppointmentModal" data-time={{ time.time }}>
                         <span>{{time.time}}</span>
                     </div>
                     {% else %}
@@ -42,7 +42,7 @@
             <option value={{patient._id}}>{{patient.name}}</option>
             {% endfor %}
             </select>
-            <input type="text" name="time" value="12:00">
+            <input type="text" name="time" value>
             <button type="submit" name="action">Add appointment</button>
 </form>
       </div>

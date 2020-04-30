@@ -17,7 +17,7 @@ mongo = PyMongo(app)
 def index():
     today = datetime.now().strftime("%d/%m/%Y")
     doctor = "5ea578ecd869174818f2c620"
-    calendar = build_calendar("27/04/2020", doctor)
+    calendar = build_calendar("30/04/2020", doctor)
     print("Calendar: ", calendar)
     patients = mongo.db.patients.find()
     return render_template("index.html", calendar=calendar, patients=patients)
@@ -25,17 +25,53 @@ def index():
 
 @app.route('/insert_appointment', methods=["POST"])
 def insert_appointment():
+    start_time = request.form.get('start_time')
+    end_time = request.form.get('end_time')
+    times = []
+    if start_time == end_time:
+        times.append({"time": start_time, "start_time": True, "end_time": True})
+    else:
+        times = get_times(start_time, end_time)
+
     appointments = mongo.db.appointments
-    appointments.insert_one(request.form.to_dict())
+    appointment_id = appointments.insert_one({
+                        "doctor_id": "5ea578ecd869174818f2c620",
+                        "patient_id": request.form.get('patient_id'),
+                        "times": times
+                            }).inserted_id
+
+    print("Appointment id: ", id)
+    slots = mongo.db.slots
+    slots.update_one({'_id': ObjectId("5ea5c3c7d869174818f2c62a")},
+                        {"$push": {"appointment_ids": str(appointment_id)}}
+                        )
+
     return redirect(url_for('index'))
+
+
+def get_times(start_time, end_time):
+    times = ["09:00", "09:15", "09:30", "09:45","10:00", "10:15", "10:30", "10:45",
+             "11:00", "11:15", "11:30", "11:45","12:00", "12:15", "12:30", "12:45",
+             "13:00", "13:15", "13:30", "13:45","14:00", "14:15", "14:30", "14:45"]
+
+    filtered_times = times[times.index(start_time):times.index(end_time) + 1]
+    times_list = []
+    for i, time in enumerate(filtered_times):
+        if time == filtered_times[0]:
+            times_list.append({"time": time, "start_time": True, "end_time": False})
+        elif time == filtered_times[-1]:
+            times_list.append({"time": time, "start_time": False, "end_time": True})
+        else:
+            times_list.append({"time": time, "start_time": False, "end_time": False})
+
+    return times_list
+
 
 @app.route('/addAppointment/<appointmentId>/<time>', methods=["POST", "GET"])
 def addAppointment(time, appointmentId):
     doctor = "5e8f51b51c9d440000598471"
     patients = mongo.db.patients.find({"doctor_id": doctor})
     return render_template("addAppointment.html", time=time, appointmentId=appointmentId, patients=patients)
-
-
 
 
 @app.route("/updateAppointment", methods=["POST"])
@@ -84,19 +120,18 @@ def build_calendar(date, doctor_id):
              {"hour": "14:00", "times": ["14:00", "14:15", "14:30", "14:45"]}]
 
     appointments = get_appointments(date, doctor_id)
-    print("Returned from getAppointments:", appointments )
     for hour in hours:
         appointment_times = []
         for i in range(4):
             time = hour["times"][i]
             appointment = search_appointments(appointments, time)
-            print('Returned from searchAppointments: ', appointment)
             if appointment is not None:
                 time_obj = next((item for item in appointment["times"] if item["time"] == time), None)
                 appointment_times.append({"time": time,
                                           "empty": False,
-                                          "first_time": time_obj["first_time"],
-                                          "last_time": time_obj["last_time"],
+                                          "first_time": time_obj["start_time"],
+                                          "last_time": time_obj["end"
+                                                                "_time"],
                                           "appointment_id": appointment["_id"],
                                           "patient_id": appointment["patient_id"],
                                           "patient_name": appointment["patient_details"]["name"]})
@@ -110,7 +145,6 @@ def build_calendar(date, doctor_id):
 
 def search_appointments(appointments, time):
     for appointment in appointments:
-        print("Search appointments recieved appointment:", appointment)
         times = appointment["times"]
         test = next((item for item in times if item["time"] == time), None)
         if test is not None:
@@ -123,13 +157,11 @@ def get_appointments(date, doctor_id):
     filtered_appointments = []
     slot = mongo.db.slots.find_one({"date": date})
     appointment_ids = slot["appointment_ids"]
-    print("appointment_ids ", appointment_ids)
     for appointment_id in appointment_ids:
         appointment = mongo.db.appointments.find_one({
             '$and': [{"_id": ObjectId(appointment_id),
                       "doctor_id": doctor_id}]
         })
-        print("appointment ", appointment)
         if appointment is not None:
             patient = mongo.db.patients.find_one({"_id": ObjectId(appointment['patient_id'])})
             appointment.update({'patient_details': patient})

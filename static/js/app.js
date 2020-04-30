@@ -44,8 +44,10 @@ $('#editAppointmentModal').on('show.bs.modal', function (event) {
     const time = slot.data('time');
     const modal = $(this);
     const id = slot.data('id')
+    const slotId = $(".calendar-container").data("slotid")
+    console.log("SLot id: " + slotId)
     modal.find('.modal-body input').val(time); // Add the selected slot time to the modal input
-    modal.find(".modal-body a").attr("href", `/remove_appointment/${id}`)
+    modal.find(".modal-body a").attr("href", `/remove_appointment/${id}/${slotId}`)
 
     const otherSlots = $(".slot").map(function (){
         const slotTime = $(this).data("time")

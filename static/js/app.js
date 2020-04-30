@@ -21,23 +21,25 @@ $('#newAppointmentModal').on('show.bs.modal', function (event) {
         console.log("other slot time:" + slotTime)
             const base = new Date("1980-01-01 " + time);
             const test = new Date("1980-01-01 " + slotTime);
-            if ((test > base)) {
+            if ((test >= base)) {
                 return this }
     })
 
-    const availableTimes = [];
+
     const endTimeList = $("#endTime");
     endTimeList.empty()
     for(i=0; i < otherSlots.length; i++){
         const slotTime = $(otherSlots[i]).data("time")
         const appointmentId = $(otherSlots[i]).data("id")
         if(!appointmentId){
-            $("#endTime").append(`<option value=${slotTime}>${slotTime}</option>`)
-            availableTimes.push(slotTime)}
+            const displayTime = moment.utc(slotTime,'HH:mm').add(15,'minutes').format('HH:mm')
+            endTimeList.append(`<option value=${slotTime}>${displayTime}</option>`)}
         else { break;}
           }
 
+console.log();
 
+console.log(moment.utc('14:45','HH:mm').add(15,'minutes').format('HH:mm'));
 
 })
 });

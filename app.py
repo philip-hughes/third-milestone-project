@@ -67,13 +67,6 @@ def get_times(start_time, end_time):
     return times_list
 
 
-@app.route('/addAppointment/<appointmentId>/<time>', methods=["POST", "GET"])
-def addAppointment(time, appointmentId):
-    doctor = "5e8f51b51c9d440000598471"
-    patients = mongo.db.patients.find({"doctor_id": doctor})
-    return render_template("addAppointment.html", time=time, appointmentId=appointmentId, patients=patients)
-
-
 @app.route("/updateAppointment", methods=["POST"])
 def update_appointment():
     appointments = mongo.db.appointments
@@ -89,11 +82,8 @@ def update_appointment():
 @app.route("/remove_appointment/<appointmentId>")
 def remove_appointment(appointmentId):
     print("appId", appointmentId)
-    doctor = "5ea578ecd869174818f2c620"
     appointments = mongo.db.appointments
-    appointments.update({'_id': ObjectId(appointmentId)},
-                        {"$pull": {"appointment_list": {"doctor_id": doctor}}}
-                        )
+    appointments.delete_one({"_id": ObjectId(appointmentId)})
     return redirect(url_for('index'))
 
 

@@ -18,9 +18,9 @@ def index():
     today = datetime.now().strftime("%d/%m/%Y")
     doctor = "5ea578ecd869174818f2c620"
     calendar = build_calendar("30/04/2020", doctor)
-    print("Calendar: ", calendar)
     patients = mongo.db.patients.find()
-    return render_template("index.html", calendar=calendar, patients=patients)
+    slot_id = mongo.db.slots.find_one({"date": today})["_id"]
+    return render_template("index.html", calendar=calendar, patients=patients, slot_id=slot_id)
 
 
 @app.route('/insert_appointment', methods=["POST"])

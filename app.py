@@ -17,7 +17,7 @@ mongo = PyMongo(app)
 def index():
     today = datetime.now().strftime("%d/%m/%Y")
     doctor = "5ea578ecd869174818f2c620"
-    calendar = build_calendar("30/04/2020", doctor)
+    calendar = build_calendar(today, doctor)
     patients = mongo.db.patients.find()
     slot_id = mongo.db.slots.find_one({"date": today})["_id"]
     return render_template("index.html", calendar=calendar, patients=patients, slot_id=slot_id)
@@ -79,11 +79,11 @@ def update_appointment():
     return redirect(url_for('index'))
 
 
-@app.route("/remove_appointment/<appointmentId>")
-def remove_appointment(appointmentId):
+@app.route("/remove_appointment/<appointmentId>/<slotId>")
+def remove_appointment(appointmentId, slotId):
     print("appId", appointmentId)
-    appointments = mongo.db.appointments
-    appointments.delete_one({"_id": ObjectId(appointmentId)})
+    mongo.db.appointments.delete_one({"_id": ObjectId(appointmentId)})
+    mongo.db.slots.update_one({"_id": ObjectId(slotId)}, {"$pull": {"appointment_ids": appointmentId}})
     return redirect(url_for('index'))
 
 

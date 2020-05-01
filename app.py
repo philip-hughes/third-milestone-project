@@ -13,14 +13,15 @@ app.config[
 mongo = PyMongo(app)
 
 
-@app.route('/')
-def index():
+@app.route('/<doctor_id>', methods=['POST'])
+def index(doctor_id):
     today = datetime.now().strftime("%d/%m/%Y")
-    doctor = "5ea578ecd869174818f2c620"
+    doctors = mongo.db.doctors.find()
+    doctor = doctor_id
     calendar = build_calendar(today, doctor)
     patients = list(mongo.db.patients.find())
     slot_id = mongo.db.slots.find_one({"date": today})["_id"]
-    return render_template("index.html", calendar=calendar, patients=patients, slot_id=slot_id)
+    return render_template("index.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors)
 
 
 @app.route('/insert_appointment', methods=["POST"])

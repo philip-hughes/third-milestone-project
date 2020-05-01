@@ -1,4 +1,11 @@
 {% extends 'base.html' %} {% block content %}
+    <form>
+        <select class="js-example-basic-single" name="doctor_id">
+            {% for doctor in doctors %}
+            <option value={{doctor._id}}>{{doctor.name}}</option>
+            {% endfor %}
+        </select>
+    </form>
      <div class="calendar-container" data-slotid={{ slot_id }}>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">

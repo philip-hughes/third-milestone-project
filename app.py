@@ -18,7 +18,7 @@ def index():
     today = datetime.now().strftime("%d/%m/%Y")
     doctor = "5ea578ecd869174818f2c620"
     calendar = build_calendar(today, doctor)
-    patients = mongo.db.patients.find()
+    patients = list(mongo.db.patients.find())
     slot_id = mongo.db.slots.find_one({"date": today})["_id"]
     return render_template("index.html", calendar=calendar, patients=patients, slot_id=slot_id)
 

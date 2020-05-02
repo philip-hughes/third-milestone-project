@@ -4,10 +4,20 @@ $(document).ready(function() {
         const url = "/remove_appointment/".concat(id);
         location.href=url;
         })
+   **/
 
-    $('#myTabs a').click(function (e) {
-    e.preventDefault()
-    $(this).tab('show')**/
+const example = flatpickr('#flatpickr', {
+    shorthandCurrentMonth: false,
+    monthSelectorType: 'static',
+    yearSelectorType: 'static',
+    onChange: function(){
+        location.href = '/set_date';
+        console.log("redirecting")
+    },
+    onClose: function(){
+        $('#flatpickr').blur()
+    }
+   });
 
 
 $('#newAppointmentModal').on('show.bs.modal', function (event) {

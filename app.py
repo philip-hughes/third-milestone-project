@@ -12,23 +12,28 @@ app.config[
 
 mongo = PyMongo(app)
 
+@app.route('/')
+def entry_page():
+    doctors = mongo.db.doctors.find()
+    return render_template('entry_page.html', doctors=doctors)
 
-@app.route('/', methods=['POST', 'GET'])
-@app.route('/<doctor_id>', methods=['POST', 'GET'])
-def index(doctor_id=None):
+
+@app.route('/calendar', methods=['POST', 'GET'])
+@app.route('/calendar/<doctor_id>', methods=['POST', 'GET'])
+def calendar(doctor_id=None):
     today = datetime.now().strftime("%d/%m/%Y")
     doctors = mongo.db.doctors.find()
     doctor = doctor_id
     calendar = build_calendar(today, doctor)
     patients = list(mongo.db.patients.find())
     slot_id = mongo.db.slots.find_one({"date": today})["_id"]
-    return render_template("index.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors)
+    return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors)
 
 
 @app.route('/set_doctor', methods=['POST', 'GET'])
 def set_doctor():
     doctor_id = request.form.get('doctor_id')
-    url = f"/{doctor_id}"
+    url = f"/calendar/{doctor_id}"
     return redirect(url)
 
 

@@ -51,7 +51,7 @@ def insert_appointment():
 
     appointments = mongo.db.appointments
     appointment_id = appointments.insert_one({
-        "doctor_id": "5ea578ecd869174818f2c620",
+        "doctor_id": selected_doctor_id,
         "patient_id": request.form.get('patient_id'),
         "times": times
     }).inserted_id

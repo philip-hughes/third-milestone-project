@@ -13,8 +13,9 @@ app.config[
 mongo = PyMongo(app)
 
 
+@app.route('/')
 @app.route('/<doctor_id>', methods=['POST'])
-def index(doctor_id):
+def index(doctor_id=None):
     today = datetime.now().strftime("%d/%m/%Y")
     doctors = mongo.db.doctors.find()
     doctor = doctor_id
@@ -36,24 +37,24 @@ def insert_appointment():
 
     appointments = mongo.db.appointments
     appointment_id = appointments.insert_one({
-                        "doctor_id": "5ea578ecd869174818f2c620",
-                        "patient_id": request.form.get('patient_id'),
-                        "times": times
-                            }).inserted_id
+        "doctor_id": "5ea578ecd869174818f2c620",
+        "patient_id": request.form.get('patient_id'),
+        "times": times
+    }).inserted_id
 
     print("Appointment id: ", id)
     slots = mongo.db.slots
     slots.update_one({'_id': ObjectId("5ea5c3c7d869174818f2c62a")},
-                        {"$push": {"appointment_ids": str(appointment_id)}}
-                        )
+                     {"$push": {"appointment_ids": str(appointment_id)}}
+                     )
 
     return redirect(url_for('index'))
 
 
 def get_times(start_time, end_time):
-    times = ["09:00", "09:15", "09:30", "09:45","10:00", "10:15", "10:30", "10:45",
-             "11:00", "11:15", "11:30", "11:45","12:00", "12:15", "12:30", "12:45",
-             "13:00", "13:15", "13:30", "13:45","14:00", "14:15", "14:30", "14:45"]
+    times = ["09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45",
+             "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45",
+             "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45"]
 
     filtered_times = times[times.index(start_time):times.index(end_time) + 1]
     times_list = []
@@ -101,7 +102,7 @@ def insert_patient():
     return redirect(url_for('index'))
 
 
-def build_calendar(date, doctor_id):
+def build_calendar(date, doctor_id="5ea578ecd869174818f2c620"):
     calendar = []
     hours = [{"hour": "09:00", "times": ["09:00", "09:15", "09:30", "09:45"]},
              {"hour": "10:00", "times": ["10:00", "10:15", "10:30", "10:45"]},

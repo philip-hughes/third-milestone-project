@@ -116,7 +116,7 @@ def insert_patient():
     return redirect(url_for('index'))
 
 
-def build_calendar(date, doctor_id="5ea578ecd869174818f2c620"):
+def build_calendar(date):
     calendar = []
     hours = [{"hour": "09:00", "times": ["09:00", "09:15", "09:30", "09:45"]},
              {"hour": "10:00", "times": ["10:00", "10:15", "10:30", "10:45"]},
@@ -125,7 +125,7 @@ def build_calendar(date, doctor_id="5ea578ecd869174818f2c620"):
              {"hour": "13:00", "times": ["13:00", "13:15", "13:30", "13:45"]},
              {"hour": "14:00", "times": ["14:00", "14:15", "14:30", "14:45"]}]
 
-    appointments = get_appointments(date, doctor_id)
+    appointments = get_appointments(date, selected_doctor_id)
     for hour in hours:
         appointment_times = []
         for i in range(4):

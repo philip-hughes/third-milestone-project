@@ -60,7 +60,7 @@ def insert_appointment():
                      {"$push": {"appointment_ids": str(appointment_id)}}
                      )
 
-    return redirect(url_for('index'))
+    return redirect(url_for('calendar'))
 
 
 def get_times(start_time, end_time):

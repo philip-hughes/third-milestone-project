@@ -1,4 +1,4 @@
-{% extends base.html %}{% block content %}
+{% extends 'base.html' %}{% block content %}
 {% for doctor in doctors %}
     <a href={{ url_for('set_doctor') }}>
         <div>{{ doctor.name }}</div>

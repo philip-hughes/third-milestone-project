@@ -12,6 +12,8 @@ app.config[
 
 mongo = PyMongo(app)
 
+selected_doctor_id = ""
+
 @app.route('/')
 def entry_page():
     doctors = mongo.db.doctors.find()
@@ -32,9 +34,9 @@ def calendar(doctor_id=None):
 
 @app.route('/set_doctor', methods=['POST', 'GET'])
 def set_doctor():
-    doctor_id = request.form.get('doctor_id')
-    url = f"/calendar/{doctor_id}"
-    return redirect(url)
+    global selected_doctor_id
+    selected_doctor_id = request.form.get('doctor_id')
+    return redirect("/calendar")
 
 
 @app.route('/insert_appointment', methods=["POST"])

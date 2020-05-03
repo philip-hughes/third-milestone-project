@@ -28,7 +28,7 @@
                 {% for time in hour.times %}
                     {% if time.empty == True %}
                     <div class="row no-gutters slot" data-toggle="modal" data-target="#newAppointmentModal" data-time={{ time.time }}>
-                        <span>{{time.time}}</span>
+                        <span class="slot-time">{{time.time}}</span>
                     </div>
                     {% else %}
                     {% if time.first_time == True %}
@@ -38,8 +38,8 @@
                             {% else %}
                                 <div class="row no-gutters slot" data-id={{ time.appointment_id }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
                     {% endif %}
-                        	<span>{{time.time}}</span>
-                        	<span>{{time.patient_name}}</span>
+                        	<span class="slot-time">{{time.time}}</span>
+                        	<span class="patient-name">{{time.patient_name}}</span>
                         </div>
                     {% endif %}
                 {% endfor %}

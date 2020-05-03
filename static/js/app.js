@@ -7,12 +7,13 @@ $(document).ready(function() {
    **/
 
 const example = flatpickr('#flatpickr', {
-    shorthandCurrentMonth: false,
+    enableTime: false,
+    dateFormat: "Y-m-d",
     monthSelectorType: 'static',
     yearSelectorType: 'static',
-    onChange: function(){
-        location.href = '/set_date';
-        console.log("redirecting")
+    onChange: function(date){
+        const selected_date = moment(date[0]).unix()
+        location.href = `/set_date/${selected_date}`;
     },
     onClose: function(){
         $('#flatpickr').blur()

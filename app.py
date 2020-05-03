@@ -14,6 +14,7 @@ app.config[
 mongo = PyMongo(app)
 
 selected_doctor_id = ""
+selected_date = datetime.now().strftime("%d/%m/%Y");
 
 @app.route('/')
 def entry_page():
@@ -28,24 +29,33 @@ def set_doctor():
     return redirect("/calendar")
 
 
+@app.route('/set_date/<date>')
+def set_date(date):
+    timestamp = int(date)
+    global selected_date
+    selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
+
+    return redirect("/calendar")
+
+
 @app.route('/calendar', methods=['POST', 'GET'])
 @app.route('/calendar/', methods=['POST', 'GET'])
 def calendar():
-    today = datetime.now().strftime("%d/%m/%Y")
+    print("Selected date: ", selected_date)
     doctors = mongo.db.doctors.find()
     doctor = selected_doctor_id
-    calendar = build_calendar(today)
+    calendar = build_calendar()
     patients = list(mongo.db.patients.find())
-    slot_id = mongo.db.slots.find_one({"date": today})["_id"]
+    slot_id = mongo.db.slots.find_one({"date": selected_date})["_id"]
     return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors, doctor=doctor)
 
 
-def build_calendar(date):
+def build_calendar():
     calendar = []
     with open('hours.json') as json_hours:
         hours = json.load(json_hours)
 
-    appointments = get_appointments(date)
+    appointments = get_appointments()
     for hour in hours:
         appointment_times = []
         for i in range(4):
@@ -69,9 +79,9 @@ def build_calendar(date):
     return calendar
 
 
-def get_appointments(date):
+def get_appointments():
     filtered_appointments = []
-    slot = mongo.db.slots.find_one({"date": date})
+    slot = mongo.db.slots.find_one({"date": selected_date})
     appointment_ids = slot["appointment_ids"]
     for appointment_id in appointment_ids:
         appointment = mongo.db.appointments.find_one({

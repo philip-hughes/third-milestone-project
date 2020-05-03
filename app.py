@@ -16,6 +16,7 @@ mongo = PyMongo(app)
 selected_doctor_id = ""
 selected_date = datetime.now().strftime("%d/%m/%Y");
 
+
 @app.route('/')
 def entry_page():
     doctors = mongo.db.doctors.find()
@@ -38,16 +39,20 @@ def set_date(date):
     return redirect("/calendar")
 
 
-@app.route('/calendar', methods=['POST', 'GET'])
-@app.route('/calendar/', methods=['POST', 'GET'])
+@app.route('/calendar')
 def calendar():
-    print("Selected date: ", selected_date)
-    doctors = mongo.db.doctors.find()
-    doctor = selected_doctor_id
     calendar = build_calendar()
+    doctors = mongo.db.doctors.find()
     patients = list(mongo.db.patients.find())
+    doctor = selected_doctor_id
     slot_id = mongo.db.slots.find_one({"date": selected_date})["_id"]
-    return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors, doctor=doctor)
+    if selected_date == datetime.now().strftime("%d/%m/%Y"):
+        date = "Today"
+    else:
+        date = selected_date
+
+    return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors,
+                           doctor=doctor, date=date)
 
 
 def build_calendar():

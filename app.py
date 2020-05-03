@@ -172,7 +172,7 @@ def remove_appointment(appointmentId, slotId):
     print("appId", appointmentId)
     mongo.db.appointments.delete_one({"_id": ObjectId(appointmentId)})
     mongo.db.slots.update_one({"_id": ObjectId(slotId)}, {"$pull": {"appointment_ids": appointmentId}})
-    return redirect(url_for('index'))
+    return redirect(url_for('calendar'))
 
 
 @app.route('/addPatient')

@@ -82,6 +82,9 @@ def build_calendar():
 def get_appointments():
     filtered_appointments = []
     slot = mongo.db.slots.find_one({"date": selected_date})
+    if slot is None:
+        mongo.db.slots.insert_one({"date": selected_date, "appointment_ids": []})
+        slot = mongo.db.slots.find_one({"date": selected_date})
     appointment_ids = slot["appointment_ids"]
     for appointment_id in appointment_ids:
         appointment = mongo.db.appointments.find_one({

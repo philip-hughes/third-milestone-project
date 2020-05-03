@@ -2,7 +2,12 @@
     <form action="{{ url_for('set_doctor') }}" method="POST">
         <select class="js-example-basic-single" name="doctor_id">
             {% for doctor in doctors %}
-            <option value={{doctor._id}}>{{doctor.name}}</option>
+               {% if doctor._id|string == selected_doctor %}
+                    <option selected value={{doctor._id}}>{{doctor.name}}</option>
+               {% else %}
+                    <option value={{doctor._id}}>{{doctor.name}}</option>
+                {% endif %}
+
             {% endfor %}
         </select>
         <button type="submit">Go</button>

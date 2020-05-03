@@ -125,9 +125,8 @@ def insert_appointment():
         "times": times
     }).inserted_id
 
-    print("Appointment id: ", id)
     slots = mongo.db.slots
-    slots.update_one({'_id': ObjectId("5ea5c3c7d869174818f2c62a")},
+    slots.update_one({'date': selected_date},
                      {"$push": {"appointment_ids": str(appointment_id)}}
                      )
 
@@ -155,7 +154,7 @@ def get_times(start_time, end_time):
 def update_appointment():
     appointments = mongo.db.appointments
     appointments.update({'_id': ObjectId(request.form.get('appointmentId'))},
-                        {"$push": {"appointment_list": {"doctor_id": "5e8f51b51c9d440000598471",
+                        {"$push": {"appointment_list": {"doctor_id": selected_doctor_id,
                                                         "type": "patient",
                                                         "patient_id": request.form.get("patient_id")}}}
                         )

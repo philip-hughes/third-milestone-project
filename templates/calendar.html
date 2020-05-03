@@ -27,17 +27,19 @@
             	<div class="col-10">
                 {% for time in hour.times %}
                     {% if time.empty == True %}
-                    <div class="row no-gutters slot" data-toggle="modal" data-target="#newAppointmentModal" data-time={{ time.time }}>
+                    <div class="row no-gutters slot free-time" data-toggle="modal" data-target="#newAppointmentModal" data-time={{ time.time }}>
                         <span class="slot-time">{{time.time}}</span>
                     </div>
                     {% else %}
-                    {% if time.first_time == True %}
-                        <div class="row no-gutters slot first-time" data-id={{ time.appointment_id }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
-                        {%  elif time.last_time == True %}
-                            <div class="row no-gutters slot last-time"  data-id={{ time.appointment_id }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
-                            {% else %}
-                                <div class="row no-gutters slot" data-id={{ time.appointment_id }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
-                    {% endif %}
+                        {% if time.first_time == True and time.last_time == True %}
+                            <div class="row no-gutters slot only-time" data-id={{ time.appointment_id }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
+                        {% elif time.first_time == True %}
+                            <div class="row no-gutters slot first-time"  data-id={{ time.appointment_id }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
+                        {% elif time.last_time == True %}
+                            <div class="row no-gutters slot last-time" data-id={{ time.appointment_id }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
+                        {% else %}
+                            <div class="row no-gutters slot middle-time" data-id={{ time.appointment_id }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
+                        {% endif %}
                         	<span class="slot-time">{{time.time}}</span>
                         	<span class="patient-name">{{time.patient_name}}</span>
                         </div>

@@ -52,7 +52,7 @@ def calendar():
         date = selected_date
 
     return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors,
-                           doctor=doctor, date=date)
+                           selected_doctor=doctor, date=date)
 
 
 def build_calendar():

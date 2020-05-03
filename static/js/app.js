@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 const example = flatpickr('#flatpickr', {
     enableTime: false,
-    dateFormat: "Y-m-d",
+    dateFormat: "d-m-Y",
     monthSelectorType: 'static',
     yearSelectorType: 'static',
     onChange: function(date){

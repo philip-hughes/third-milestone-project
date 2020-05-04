@@ -13,6 +13,28 @@
   background-color: lightblue;
   border-bottom: 1px solid white;
   border-right: 1px solid white;
+  height: 25%;
+}
+
+.first-time, .middle-time, .last-time, .only-time {
+  background-color: darkblue;
+  color: white;
+}
+
+.first-time, .middle-time {
+  border-bottom: 0px;
+}
+
+.first-time {
+  border-radius: 5px 5px 0px 0px;
+}
+
+.last-time {
+  border-radius: 0px 0px 5px 5px;
+}
+
+.only-time {
+  border-radius: 5px;
 }
 
 .nav-tabs {

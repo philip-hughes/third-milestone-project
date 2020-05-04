@@ -127,7 +127,9 @@ def insert_appointment():
     appointment_id = appointments.insert_one({
         "doctor_id": selected_doctor_id,
         "patient_id": request.form.get('patient_id'),
-        "times": times
+        "times": times,
+        "start_time": start_time,
+        "end_time": end_time
     }).inserted_id
 
     slots = mongo.db.slots

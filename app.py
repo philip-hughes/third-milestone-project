@@ -46,7 +46,7 @@ def calendar():
     calendar = build_calendar()
     doctors = mongo.db.doctors.find()
     patients = list(mongo.db.patients.find())
-    doctor = selected_doctor["_id"]
+    doctor = selected_doctor
     slot_id = mongo.db.slots.find_one({"date": selected_date})["_id"]
     if selected_date == datetime.now().strftime("%d/%m/%Y"):
         date = "Today"

@@ -7,6 +7,7 @@ $(document).ready(function() {
    **/
 
 const example = flatpickr('#flatpickr', {
+    inline: true,
     enableTime: false,
     dateFormat: "d-m-Y",
     monthSelectorType: 'static',

@@ -42,6 +42,7 @@ def set_date(date):
 @app.route('/calendar')
 def calendar():
     calendar = build_calendar()
+    print("Calendar: ", calendar)
     doctors = mongo.db.doctors.find()
     patients = list(mongo.db.patients.find())
     doctor = selected_doctor_id
@@ -71,11 +72,13 @@ def build_calendar():
                 appointment_times.append({"time": time,
                                           "empty": False,
                                           "first_time": time_obj["start_time"],
-                                          "last_time": time_obj["end"
-                                                                "_time"],
+                                          "last_time": time_obj["end_time"],
                                           "appointment_id": appointment["_id"],
                                           "patient_id": appointment["patient_id"],
-                                          "patient_name": appointment["patient_details"]["name"]})
+                                          "patient_name": appointment["patient_details"]["name"],
+                                          "start_time": appointment["start_time"],
+                                          "end_time": appointment["end_time"]
+                                          })
             else:
                 appointment_times.append({"time": time, "empty": True})
 

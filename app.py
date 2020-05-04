@@ -44,7 +44,6 @@ def set_date(date):
 @app.route('/calendar')
 def calendar():
     calendar = build_calendar()
-    print("Calendar: ", calendar)
     doctors = mongo.db.doctors.find()
     patients = list(mongo.db.patients.find())
     doctor = selected_doctor["_id"]

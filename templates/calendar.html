@@ -2,7 +2,7 @@
     <form action="{{ url_for('set_doctor') }}" method="POST">
         <select class="js-example-basic-single" name="doctor_id">
             {% for doctor in doctors %}
-               {% if doctor._id == selected_doctor %}
+               {% if doctor._id == selected_doctor._id %}
                     <option selected value={{doctor._id}}>{{doctor.name}}</option>
                {% else %}
                     <option value={{doctor._id}}>{{doctor.name}}</option>
@@ -16,8 +16,6 @@
     <div class="row no-gutters">
         <input id="flatpickr" name="date" type="text" value={{ date }}>
     </div>
-
-
 
 
      <div class="calendar-container" data-slotid={{ slot_id }}>
@@ -97,7 +95,7 @@
       </div>
       <div class="modal-body">
             <label for="doctorName">Doctor</label>
-            <span id="doctorName"></span>
+            <span id="doctorName">{{ selected_doctor["name"] }}</span>
             <label for="startTime">Start time</label>
             <span id="startTime"></span>
             <label for="endTime">End time</label>

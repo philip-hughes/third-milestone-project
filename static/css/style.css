@@ -1,3 +1,10 @@
+/*********Date picker********************/
+#flatpickr {
+  display: none;
+}
+
+
+
 /*********Appointments grid**************/
 .hour-container {
     height: 100px;

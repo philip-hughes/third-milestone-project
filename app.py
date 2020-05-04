@@ -25,10 +25,10 @@ def entry_page():
 
 @app.route('/set_doctor', methods=['POST', 'GET'])
 def set_doctor():
-    global selected_doctor
+
     selected_doctor_id = request.form.get('doctor_id')
+    global selected_doctor
     selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(selected_doctor_id)})
-    print("Doctors: ", selected_doctor)
     return redirect("/calendar")
 
 

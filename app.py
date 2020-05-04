@@ -13,7 +13,7 @@ app.config[
 
 mongo = PyMongo(app)
 
-selected_doctor_id = ""
+selected_doctor = {}
 selected_date = datetime.now().strftime("%d/%m/%Y");
 
 
@@ -25,8 +25,10 @@ def entry_page():
 
 @app.route('/set_doctor', methods=['POST', 'GET'])
 def set_doctor():
-    global selected_doctor_id
+    global selected_doctor
     selected_doctor_id = request.form.get('doctor_id')
+    selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(selected_doctor_id)})
+    print("Doctors: ", selected_doctor)
     return redirect("/calendar")
 
 
@@ -45,7 +47,7 @@ def calendar():
     print("Calendar: ", calendar)
     doctors = mongo.db.doctors.find()
     patients = list(mongo.db.patients.find())
-    doctor = selected_doctor_id
+    doctor = selected_doctor["_id"]
     slot_id = mongo.db.slots.find_one({"date": selected_date})["_id"]
     if selected_date == datetime.now().strftime("%d/%m/%Y"):
         date = "Today"
@@ -97,7 +99,7 @@ def get_appointments():
     for appointment_id in appointment_ids:
         appointment = mongo.db.appointments.find_one({
             '$and': [{"_id": ObjectId(appointment_id),
-                      "doctor_id": selected_doctor_id}]
+                      "doctor_id": selected_doctor["_id"]}]
         })
         if appointment is not None:
             patient = mongo.db.patients.find_one({"_id": ObjectId(appointment['patient_id'])})
@@ -128,7 +130,7 @@ def insert_appointment():
 
     appointments = mongo.db.appointments
     appointment_id = appointments.insert_one({
-        "doctor_id": selected_doctor_id,
+        "doctor_id": selected_doctor["_id"],
         "patient_id": request.form.get('patient_id'),
         "times": times,
         "start_time": start_time,
@@ -164,7 +166,7 @@ def get_times(start_time, end_time):
 def update_appointment():
     appointments = mongo.db.appointments
     appointments.update({'_id': ObjectId(request.form.get('appointmentId'))},
-                        {"$push": {"appointment_list": {"doctor_id": selected_doctor_id,
+                        {"$push": {"appointment_list": {"doctor_id": selected_doctor["_id"],
                                                         "type": "patient",
                                                         "patient_id": request.form.get("patient_id")}}}
                         )

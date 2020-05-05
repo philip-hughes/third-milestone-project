@@ -6,6 +6,12 @@ $(document).ready(function() {
         })
    **/
 
+const selectDoctorElement = $(".js-example-basic-single")
+$("#select-doc").on("click",function(){
+    const doctorId = selectDoctorElement.val();
+    location.href = `/set_doctor/${doctorId}`
+})
+
 const example = flatpickr('#flatpickr', {
     inline: true,
     enableTime: false,

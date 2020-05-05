@@ -1,7 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 <nav class="row no-gutters">
     <div class="col-3">
-        <form action="{{ url_for('set_doctor') }}" method="POST">
             <select class="js-example-basic-single" name="doctor_id">
             {% for doctor in doctors %}
                {% if doctor._id == selected_doctor._id %}
@@ -11,8 +10,7 @@
                 {% endif %}
             {% endfor %}
             </select>
-            <button type="submit">Go</button>
-        </form>
+            <button id="select-doc" type="submit">Go</button>
     </div>
     <div class="col-3">
         <a href="{{url_for('addPatient')}}">Add patient</a>
@@ -25,7 +23,7 @@
      <div class="calendar-container col-8" data-slotid={{ slot_id }}>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">
-                <div class="col-1 hour">{{hour.hour}}</div>
+                <div class="col-1 hour"><div>{{hour.hour}}</div></div>
             	<div class="col-11">
                 {% for time in hour.times %}
                     {% if time.empty == True %}

@@ -1,7 +1,12 @@
 {% extends 'base.html' %}{% block content %}
-<ul>
+
 {% for doctor in doctors %}
-<li><a href={{ url_for('set_doctor', doctor_id = doctor._id) }}>{{doctor.name}}</a></li>
+<div>
+    <a href={{ url_for('set_doctor', doctor_id = doctor._id) }}>
+        <span>{{doctor.name}}</span>
+        <img class="doc-entry-image" src={{ doctor.profile_picture }}>
+    </a>
+</div>
 {% endfor %}
-</ul>
+
 {% endblock %}

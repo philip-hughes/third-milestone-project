@@ -33,10 +33,11 @@ nav {
 }
 
 .slot {
-  background-color: lightblue;
-  border-bottom: 1px solid white;
-  border-right: 1px solid white;
   height: 25%;
+}
+
+.free-time {
+  border-bottom: .5px solid #d8e1e9;
 }
 
 .first-time, .middle-time, .last-time, .only-time {
@@ -60,6 +61,8 @@ nav {
   border-radius: 5px;
 }
 
+
+/*
 .nav-tabs {
   border-bottom: 1px solid #dddddd;
 }
@@ -89,4 +92,4 @@ nav {
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
 }
-
+*/

@@ -29,11 +29,13 @@ nav {
 .hour {
   background-color: #f6eeee;
   border-bottom: 1px solid white;
+  border-radius: 3px;
   height: 100px;
 }
 
 .slot {
   height: 25%;
+  margin-left: 5px;
 }
 
 .free-time {

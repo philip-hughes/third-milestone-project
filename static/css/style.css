@@ -8,6 +8,9 @@ nav {
   display: none;
 }
 
+.flatpickr-calendar {
+  margin: 0 auto;
+}
 
 
 /*********Appointments grid**************/

@@ -38,6 +38,10 @@ nav {
   margin-left: 5px;
 }
 
+.slot-time, .patient-name {
+  padding-left: 5px;
+}
+
 .free-time {
   border-bottom: .5px solid #d8e1e9;
 }

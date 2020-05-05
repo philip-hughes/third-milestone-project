@@ -8,8 +8,9 @@ nav {
   display: none;
 }
 
-.flatpickr-calendar {
+.flatpickr-calendar.inline {
   margin: 0 auto;
+  box-shadow: none;
 }
 
 

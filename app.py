@@ -41,18 +41,20 @@ def set_date(date):
 
 @app.route('/calendar')
 def calendar():
-    calendar = build_calendar()
-    doctors = mongo.db.doctors.find()
-    patients = list(mongo.db.patients.find())
-    doctor = selected_doctor
-    slot_id = mongo.db.slots.find_one({"date": selected_date})["_id"]
-    if selected_date == datetime.now().strftime("%d/%m/%Y"):
-        date = "Today"
-    else:
-        date = selected_date
+    if selected_doctor:
+        calendar = build_calendar()
+        doctors = mongo.db.doctors.find()
+        patients = list(mongo.db.patients.find())
+        slot_id = mongo.db.slots.find_one({"date": selected_date})["_id"]
+        if selected_date == datetime.now().strftime("%d/%m/%Y"):
+            date = "Today"
+        else:
+            date = selected_date
 
-    return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors,
-                           selected_doctor=doctor, date=date)
+        return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors,
+                               selected_doctor=selected_doctor, date=date)
+    else:
+        return redirect('/')
 
 
 def build_calendar():

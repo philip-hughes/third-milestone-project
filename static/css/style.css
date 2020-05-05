@@ -13,6 +13,9 @@ nav {
   box-shadow: none;
 }
 
+.datepicker-container {
+  margin-left: 25px;
+}
 
 /*********Appointments grid**************/
 .main-container {

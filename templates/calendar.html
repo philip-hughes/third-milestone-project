@@ -18,11 +18,11 @@
         <a href="{{url_for('addPatient')}}">Add patient</a>
     </div>
 </nav>
-<div class="row">
+<div class="row main-container">
     <div class="col-3">
         <input id="flatpickr" name="date" type="text" value={{ date }}>
     </div>
-     <div class="calendar-container col-9" data-slotid={{ slot_id }}>
+     <div class="calendar-container col-7" data-slotid={{ slot_id }}>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">
                 <div class="col-1 hour">{{hour.hour}}</div>

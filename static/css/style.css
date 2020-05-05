@@ -11,6 +11,10 @@ nav {
 
 
 /*********Appointments grid**************/
+.main-container {
+  padding-top: 10px;
+}
+
 .hour-container {
     height: 100px;
 }

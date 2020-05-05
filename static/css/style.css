@@ -31,6 +31,14 @@ nav {
   border-bottom: 1px solid white;
   border-radius: 3px;
   height: 100px;
+  position: relative;
+}
+
+.hour div {
+  position: absolute;
+  top: 37%;
+  left: 23%;
+
 }
 
 .slot {

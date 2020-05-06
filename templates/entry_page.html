@@ -1,12 +1,13 @@
 {% extends 'base.html' %}{% block content %}
-
+<div class="row no-gutters">
 {% for doctor in doctors %}
-<div>
+<div class="col-3">
     <a href={{ url_for('set_doctor', doctor_id = doctor._id) }}>
-        <span>{{doctor.name}}</span>
         <img class="doc-entry-image" src={{ doctor.profile_picture }}>
+        <span class="doc-entry-name">{{doctor.name}}</span>
     </a>
 </div>
 {% endfor %}
+</div>
 
 {% endblock %}

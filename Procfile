@@ -1,1 +1,1 @@
-web: gunicorn app:doctor-docs
+web: gunicorn app:app

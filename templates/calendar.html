@@ -1,6 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 <nav class="row no-gutters">
     <div class="col-3">
+        <img class="doc-cal-image" src={{ selected_doctor.profile_picture }}>
+        <span class="doc-cal-name">{{selected_doctor.name}}</span>
+    </div>
+    <div class="col-3">
             <select class="js-example-basic-single" name="doctor_id">
             {% for doctor in doctors %}
                {% if doctor._id == selected_doctor._id %}
@@ -16,11 +20,12 @@
         <a href="{{url_for('addPatient')}}">Add patient</a>
     </div>
 </nav>
-<div class="row main-container">
+<div class="row no-gutters main-container">
     <div class="col-3 datepicker-container">
         <input id="flatpickr" name="date" type="text" value={{ date }}>
     </div>
-     <div class="calendar-container col-8" data-slotid={{ slot_id }}>
+     <div class="calendar-container  col-7" data-slotid={{ slot_id }}>
+     <div>{{ date }}</div>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">
                 <div class="col-1 hour"><div>{{hour.hour}}</div></div>
@@ -111,7 +116,5 @@
     </div>
   </div>
 </div>
-
-
 
 {% endblock %}

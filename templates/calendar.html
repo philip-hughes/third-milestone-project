@@ -25,7 +25,7 @@
         <input id="flatpickr" name="date" type="text" value={{ date }}>
     </div>
      <div class="calendar-container  col-7" data-slotid={{ slot_id }}>
-     <div>{{ date }}</div>
+     <div><span id="selected-date">{{ date }}</span></div>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">
                 <div class="col-1 hour"><div>{{hour.hour}}</div></div>
@@ -60,6 +60,7 @@
         {% endfor %}
      </div>
 </div>
+
 <!-- New appointment Modal -->
 <div class="modal fade" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

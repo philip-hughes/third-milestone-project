@@ -34,8 +34,9 @@ def set_doctor(doctor_id):
 def set_date(date):
     timestamp = int(date)
     global selected_date
+    print("Set date1: ", selected_date)
     selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
-
+    print("Set date2: ", selected_date)
     return redirect("/calendar")
 
 

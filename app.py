@@ -41,6 +41,8 @@ def set_date(date):
 
 @app.route('/calendar')
 def calendar():
+    print("Selected date1: ", selected_date)
+    print("Selected doctor1: ", selected_doctor)
     if selected_doctor:
         calendar = build_calendar()
         doctors = mongo.db.doctors.find()
@@ -50,7 +52,8 @@ def calendar():
             date = "Today"
         else:
             date = selected_date
-
+        print("Selected date2: ", date)
+        print("Selected doctor2: ", selected_doctor)
         return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors,
                                selected_doctor=selected_doctor, date=date)
     else:

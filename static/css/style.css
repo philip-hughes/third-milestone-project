@@ -41,6 +41,14 @@ nav {
   margin-left: 25px;
 }
 /*********Appointments grid**************/
+#selected-date {
+  color: white;
+  background-color: #569ff7;
+  border-radius: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
 .main-container {
   padding-top: 10px;
   margin: 0 auto;

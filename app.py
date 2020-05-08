@@ -32,7 +32,9 @@ def set_doctor(doctor_id):
 
 @app.route('/set_date/<date>')
 def set_date(date):
+    print("Url date: ", date)
     timestamp = int(date)
+    print("timestamp date", timestamp)
     global selected_date
     print("Set date1: ", selected_date)
     selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')

@@ -24,7 +24,7 @@
     <div class="col-3 datepicker-container">
         <input id="flatpickr" name="date" type="text" value={{ date }}>
     </div>
-     <div class="calendar-container  col-7" data-slotid={{ slot_id }}>
+     <div class="calendar-container  col-7" data-dayid={{ day_id }}>
      <div><span id="selected-date">{{ date }}</span></div>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">

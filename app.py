@@ -13,7 +13,6 @@ app.config[
 
 mongo = PyMongo(app)
 
-#selected_doctor = {}
 selected_date = datetime.now().strftime("%d/%m/%Y");
 
 
@@ -26,8 +25,7 @@ def entry_page():
 @app.route('/set_doctor/<doctor_id>')
 def set_doctor(doctor_id):
     selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(doctor_id)})
-    print("selected doctor: ", selected_doctor)
-    return redirect(f"/calendar/{selected_doctor}")
+    return calendar(selected_doctor)
 
 
 @app.route('/set_date/<date>')
@@ -38,7 +36,7 @@ def set_date(date):
     return redirect("/calendar")
 
 
-@app.route('/calendar/<selected_doctor>')
+@app.route('/calendar/')
 def calendar(selected_doctor):
     if selected_doctor:
         calendar = build_calendar(selected_doctor)
@@ -50,6 +48,7 @@ def calendar(selected_doctor):
             date = "Today"
         else:
             date = selected_date
+        print("Selected doctor: ", selected_doctor)
         return render_template("calendar.html", calendar=calendar, patients=patients, day_id=day_id, doctors=doctors,
                                selected_doctor=selected_doctor, date=date)
     else:

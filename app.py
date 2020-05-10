@@ -25,7 +25,8 @@ def entry_page():
 @app.route('/set_doctor/<doctor_id>')
 def set_doctor(doctor_id):
     selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(doctor_id)})
-    return calendar(selected_doctor)
+    print("selected doctor: ", selected_doctor)
+    return redirect(f"/calendar/{selected_doctor}")
 
 
 @app.route('/set_date/<date>')
@@ -36,9 +37,10 @@ def set_date(date):
     return redirect("/calendar")
 
 
-@app.route('/calendar/')
+@app.route('/calendar/<selected_doctor>')
 def calendar(selected_doctor):
     if selected_doctor:
+        selected_doctor = eval(selected_doctor)
         calendar = build_calendar(selected_doctor)
         doctors = mongo.db.doctors.find()
         patients = list(mongo.db.patients.find())

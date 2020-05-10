@@ -2,7 +2,6 @@ import os
 from flask import Flask, redirect, render_template, request, session, url_for
 from flask_pymongo import PyMongo
 from datetime import datetime
-from datetime import timedelta
 from bson.objectid import ObjectId
 import json
 
@@ -33,20 +32,14 @@ def set_doctor(doctor_id):
 
 @app.route('/set_date/<date>')
 def set_date(date):
-    print("Url date: ", date)
     timestamp = int(date)
-    print("timestamp date", timestamp)
     global selected_date
-    print("Set date1: ", selected_date)
     selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
-    print("Set date2: ", selected_date)
     return redirect("/calendar")
 
 
 @app.route('/calendar')
 def calendar():
-    print("Selected date1: ", selected_date)
-    print("Selected doctor1: ", selected_doctor)
     if selected_doctor:
         calendar = build_calendar()
         doctors = mongo.db.doctors.find()
@@ -56,8 +49,6 @@ def calendar():
             date = "Today"
         else:
             date = selected_date
-        print("Selected date2: ", date)
-        print("Selected doctor2: ", selected_doctor)
         return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors,
                                selected_doctor=selected_doctor, date=date)
     else:
@@ -134,6 +125,7 @@ def get_times(first_slot, last_slot):
 
     return times_list
 
+
 def search_appointments(appointments, time):
     for appointment in appointments:
         times = appointment["times"]
@@ -164,9 +156,6 @@ def insert_appointment():
     return redirect(url_for('calendar'))
 
 
-
-
-
 @app.route("/updateAppointment", methods=["POST"])
 def update_appointment():
     appointments = mongo.db.appointments
@@ -175,7 +164,6 @@ def update_appointment():
                                                         "type": "patient",
                                                         "patient_id": request.form.get("patient_id")}}}
                         )
-
     return redirect(url_for('index'))
 
 

@@ -62,11 +62,11 @@ $('#editAppointmentModal').on('show.bs.modal', function (event) {
     const endTime = moment.utc(slot.data('end'),'HH:mm').add(15,'minutes').format('HH:mm')
     const modal = $(this);
     const id = slot.data('id')
-    const slotId = $(".calendar-container").data("slotid")
-    console.log("SLot id: " + slotId)
+    const dayId = $(".calendar-container").data("dayid")
+    console.log("SLot id: " + dayId)
     modal.find('.modal-body #startTime').text(startTime);
     modal.find('.modal-body #endTime').text(endTime); // Add the selected slot time to the modal input
-    modal.find(".modal-body a").attr("href", `/remove_appointment/${id}/${slotId}`)
+    modal.find(".modal-body a").attr("href", `/remove_appointment/${id}/${dayId}`)
 })
 
 

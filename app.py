@@ -99,6 +99,7 @@ def get_appointments():
                       "doctor_id": selected_doctor["_id"]}]
         })
         if appointment is not None:
+
             appointment_slots = get_times(appointment['first_slot'], appointment['last_slot'])
             patient = mongo.db.patients.find_one({"_id": ObjectId(appointment['patient_id'])})
             appointment.update({'patient_details': patient, "appointment_slots": appointment_slots})
@@ -112,18 +113,18 @@ def get_times(first_slot, last_slot):
         times = json.load(json_times)
     if first_slot == last_slot:
         return [{"time": first_slot, "first_slot": True, "last_slot": True}]
-
-    filtered_times = times[times.index(first_slot):times.index(last_slot) + 1]
-    times_list = []
-    for i, time in enumerate(filtered_times):
-        if time == filtered_times[0]:
-            times_list.append({"time": time, "first_slot": True, "last_slot": False})
-        elif time == filtered_times[-1]:
-            times_list.append({"time": time, "first_slot": False, "last_slot": True})
-        else:
-            times_list.append({"time": time, "first_slot": False, "first_slot": False})
-
-    return times_list
+    else:
+        filtered_times = times[times.index(first_slot):times.index(last_slot) + 1]
+        times_list = []
+        for i, time in enumerate(filtered_times):
+            if time == filtered_times[0]:
+                times_list.append({"time": time, "first_slot": True, "last_slot": False})
+            elif time == filtered_times[-1]:
+                times_list.append({"time": time, "first_slot": False, "last_slot": True})
+            else:
+                times_list.append({"time": time, "first_slot": False, "last_slot": False})
+            print("times list: ", times_list)
+        return times_list
 
 
 def search_appointments(appointments, time):

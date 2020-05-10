@@ -97,8 +97,6 @@ def build_calendar():
 
 def get_appointments():
     filtered_appointments = []
-    with open('times.json') as json_times:
-        slot_times = json.load(json_times)
     slot = mongo.db.slots.find_one({"date": selected_date})
     if slot is None:
         mongo.db.slots.insert_one({"date": selected_date, "appointment_ids": []})
@@ -110,16 +108,29 @@ def get_appointments():
                       "doctor_id": selected_doctor["_id"]}]
         })
         if appointment is not None:
-
-            first_slot_index = slot_times.index(appointment["start_time"])
-            last_slot_index = slot_times.index(appointment["end_time"])
-            appointment_slots = slot_times[first_slot_index:last_slot_index + 1]
+            appointment_slots = get_times(appointment['first_slot'], appointment['last_slot'])
             patient = mongo.db.patients.find_one({"_id": ObjectId(appointment['patient_id'])})
             appointment.update({'patient_details': patient, "appointment_slots": appointment_slots})
             print("Appointment: ", appointment)
             filtered_appointments.append(appointment)
     return filtered_appointments
 
+
+def get_times(start_time, end_time):
+    with open('times.json') as json_times:
+        times = json.load(json_times)
+
+    filtered_times = times[times.index(start_time):times.index(end_time) + 1]
+    times_list = []
+    for i, time in enumerate(filtered_times):
+        if time == filtered_times[0]:
+            times_list.append({"time": time, "start_time": True, "end_time": False})
+        elif time == filtered_times[-1]:
+            times_list.append({"time": time, "start_time": False, "end_time": True})
+        else:
+            times_list.append({"time": time, "start_time": False, "end_time": False})
+
+    return times_list
 
 def search_appointments(appointments, time):
     for appointment in appointments:
@@ -151,21 +162,7 @@ def insert_appointment():
     return redirect(url_for('calendar'))
 
 
-def get_times(start_time, end_time):
-    with open('times.json') as json_times:
-        times = json.load(json_times)
 
-    filtered_times = times[times.index(start_time):times.index(end_time) + 1]
-    times_list = []
-    for i, time in enumerate(filtered_times):
-        if time == filtered_times[0]:
-            times_list.append({"time": time, "start_time": True, "end_time": False})
-        elif time == filtered_times[-1]:
-            times_list.append({"time": time, "start_time": False, "end_time": True})
-        else:
-            times_list.append({"time": time, "start_time": False, "end_time": False})
-
-    return times_list
 
 
 @app.route("/updateAppointment", methods=["POST"])

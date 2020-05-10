@@ -1,12 +1,5 @@
 $(document).ready(function() {
-
-const selectDoctorElement = $(".js-example-basic-single")
-$("#select-doc").on("click",function(){
-    const doctorId = selectDoctorElement.val();
-    location.href = `/set_doctor/${doctorId}`
-})
-
-const example = flatpickr('#flatpickr', {
+    const example = flatpickr('#flatpickr', {
     inline: true,
     enableTime: false,
     dateFormat: "d-m-Y",
@@ -62,8 +55,24 @@ $('#editAppointmentModal').on('show.bs.modal', function (event) {
     modal.find(".modal-body a").attr("href", `/remove_appointment/${id}/${dayId}`)
 })
 
+
+$("#select-doc").on("click",function(){
+    const selectDoctorElement = $(".js-example-basic-single")
+    const doctorId = selectDoctorElement.val();
+    setDoctorId(doctorId); // set id in local storage
+    const selected_date = localStorage.getItem("selected_date");
+    if (selected_date === null) {
+        location.href = `/calendar/${doctorId}/${selected_date}`
+    else
+        location.href = `/calendar/${doctorId}`
+    }
+})
+
 function setDoctorId(doctorId){
     localStorage.setItem("selected_doctor_id", doctorId);
+
+function setSelectedDate(selectedDate){
+    localStorage.setItem("selected_date", selectedDate);
 }
 
 });

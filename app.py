@@ -70,13 +70,13 @@ def build_calendar():
                 time_obj = next((item for item in appointment["appointment_slots"] if item["time"] == time), None)
                 appointment_times.append({"time": time,
                                           "empty": False,
-                                          "first_time": time_obj["start_time"],
-                                          "last_time": time_obj["end_time"],
+                                          "first_time": time_obj["first_slot"],
+                                          "last_time": time_obj["last_slot"],
                                           "appointment_id": appointment["_id"],
                                           "patient_id": appointment["patient_id"],
                                           "patient_name": appointment["patient_details"]["name"],
-                                          "start_time": appointment["start_time"],
-                                          "end_time": appointment["end_time"]
+                                          "start_time": appointment["first_slot"],
+                                          "end_time": appointment["last_slot"]
                                           })
             else:
                 appointment_times.append({"time": time, "empty": True})

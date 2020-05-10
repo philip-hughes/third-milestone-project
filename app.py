@@ -13,7 +13,7 @@ app.config[
 
 mongo = PyMongo(app)
 
-selected_doctor = {}
+#selected_doctor = {}
 selected_date = datetime.now().strftime("%d/%m/%Y");
 
 
@@ -25,9 +25,9 @@ def entry_page():
 
 @app.route('/set_doctor/<doctor_id>')
 def set_doctor(doctor_id):
-    global selected_doctor
     selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(doctor_id)})
-    return redirect("/calendar")
+    print("selected doctor: ", selected_doctor)
+    return redirect(f"/calendar/{selected_doctor}")
 
 
 @app.route('/set_date/<date>')
@@ -38,13 +38,14 @@ def set_date(date):
     return redirect("/calendar")
 
 
-@app.route('/calendar')
-def calendar():
+@app.route('/calendar/<selected_doctor>')
+def calendar(selected_doctor):
     if selected_doctor:
-        calendar = build_calendar()
+        calendar = build_calendar(selected_doctor)
         doctors = mongo.db.doctors.find()
         patients = list(mongo.db.patients.find())
         day_id = mongo.db.days.find_one({"date": selected_date})["_id"]
+        print("Day id: ", day_id)
         if selected_date == datetime.now().strftime("%d/%m/%Y"):
             date = "Today"
         else:
@@ -55,12 +56,12 @@ def calendar():
         return redirect('/')
 
 
-def build_calendar():
+def build_calendar(selected_doctor):
     calendar = []
     with open('hours.json') as json_hours:
         hours = json.load(json_hours)
 
-    appointments = get_appointments()
+    appointments = get_appointments(selected_doctor)
     for hour in hours:
         appointment_times = []
         for i in range(4):
@@ -86,7 +87,7 @@ def build_calendar():
     return calendar
 
 
-def get_appointments():
+def get_appointments(selected_doctor):
     filtered_appointments = []
     slot = mongo.db.days.find_one({"date": selected_date})
     if slot is None:
@@ -96,7 +97,7 @@ def get_appointments():
     for appointment_id in appointment_ids:
         appointment = mongo.db.appointments.find_one({
             '$and': [{"_id": ObjectId(appointment_id),
-                      "doctor_id": selected_doctor["_id"]}]
+                      "doctor_id": selected_doctor }]
         })
         if appointment is not None:
 
@@ -167,11 +168,12 @@ def update_appointment():
     return redirect(url_for('index'))
 
 
-@app.route("/remove_appointment/<appointmentId>/<slotId>")
-def remove_appointment(appointmentId, slotId):
+@app.route("/remove_appointment/<appointmentId>/<dayId>")
+def remove_appointment(appointmentId, dayId):
     print("appId", appointmentId)
     mongo.db.appointments.delete_one({"_id": ObjectId(appointmentId)})
-    mongo.db.days.update_one({"_id": ObjectId(slotId)}, {"$pull": {"appointment_ids": appointmentId}})
+    print("dayId", dayId)
+    mongo.db.days.update_one({"_id": ObjectId(dayId)}, {"$pull": {"appointment_ids": appointmentId}})
     return redirect(url_for('calendar'))
 
 

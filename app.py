@@ -49,7 +49,7 @@ def calendar():
             date = "Today"
         else:
             date = selected_date
-        return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=day_id, doctors=doctors,
+        return render_template("calendar.html", calendar=calendar, patients=patients, day_id=day_id, doctors=doctors,
                                selected_doctor=selected_doctor, date=date)
     else:
         return redirect('/')

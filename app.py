@@ -67,7 +67,7 @@ def build_calendar():
             time = hour["times"][i]
             appointment = search_appointments(appointments, time)
             if appointment is not None:
-                time_obj = next((item for item in appointment["times"] if item["time"] == time), None)
+                time_obj = next((item for item in appointment["appointment_slots"] if item["time"] == time), None)
                 appointment_times.append({"time": time,
                                           "empty": False,
                                           "first_time": time_obj["start_time"],
@@ -128,7 +128,7 @@ def get_times(first_slot, last_slot):
 
 def search_appointments(appointments, time):
     for appointment in appointments:
-        times = appointment["times"]
+        times = appointment["appointment_slots"]
         test = next((item for item in times if item["time"] == time), None)
         if test is not None:
             return appointment

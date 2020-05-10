@@ -116,19 +116,21 @@ def get_appointments():
     return filtered_appointments
 
 
-def get_times(start_time, end_time):
+def get_times(first_slot, last_slot):
     with open('times.json') as json_times:
         times = json.load(json_times)
+    if first_slot == last_slot:
+        return [{"time": first_slot, "first_slot": True, "last_slot": True}]
 
-    filtered_times = times[times.index(start_time):times.index(end_time) + 1]
+    filtered_times = times[times.index(first_slot):times.index(last_slot) + 1]
     times_list = []
     for i, time in enumerate(filtered_times):
         if time == filtered_times[0]:
-            times_list.append({"time": time, "start_time": True, "end_time": False})
+            times_list.append({"time": time, "first_slot": True, "last_slot": False})
         elif time == filtered_times[-1]:
-            times_list.append({"time": time, "start_time": False, "end_time": True})
+            times_list.append({"time": time, "first_slot": False, "last_slot": True})
         else:
-            times_list.append({"time": time, "start_time": False, "end_time": False})
+            times_list.append({"time": time, "first_slot": False, "first_slot": False})
 
     return times_list
 

@@ -44,12 +44,12 @@ def calendar():
         calendar = build_calendar()
         doctors = mongo.db.doctors.find()
         patients = list(mongo.db.patients.find())
-        slot_id = mongo.db.slots.find_one({"date": selected_date})["_id"]
+        day_id = mongo.db.days.find_one({"date": selected_date})["_id"]
         if selected_date == datetime.now().strftime("%d/%m/%Y"):
             date = "Today"
         else:
             date = selected_date
-        return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=slot_id, doctors=doctors,
+        return render_template("calendar.html", calendar=calendar, patients=patients, slot_id=day_id, doctors=doctors,
                                selected_doctor=selected_doctor, date=date)
     else:
         return redirect('/')
@@ -88,10 +88,10 @@ def build_calendar():
 
 def get_appointments():
     filtered_appointments = []
-    slot = mongo.db.slots.find_one({"date": selected_date})
+    slot = mongo.db.days.find_one({"date": selected_date})
     if slot is None:
-        mongo.db.slots.insert_one({"date": selected_date, "appointment_ids": []})
-        slot = mongo.db.slots.find_one({"date": selected_date})
+        mongo.db.days.insert_one({"date": selected_date, "appointment_ids": []})
+        slot = mongo.db.days.find_one({"date": selected_date})
     appointment_ids = slot["appointment_ids"]
     for appointment_id in appointment_ids:
         appointment = mongo.db.appointments.find_one({
@@ -148,8 +148,7 @@ def insert_appointment():
         "last_slot": end_time
     }).inserted_id
 
-    slots = mongo.db.slots
-    slots.update_one({'date': selected_date},
+    mongo.db.days.update_one({'date': selected_date},
                      {"$push": {"appointment_ids": str(appointment_id)}}
                      )
 
@@ -171,7 +170,7 @@ def update_appointment():
 def remove_appointment(appointmentId, slotId):
     print("appId", appointmentId)
     mongo.db.appointments.delete_one({"_id": ObjectId(appointmentId)})
-    mongo.db.slots.update_one({"_id": ObjectId(slotId)}, {"$pull": {"appointment_ids": appointmentId}})
+    mongo.db.days.update_one({"_id": ObjectId(slotId)}, {"$pull": {"appointment_ids": appointmentId}})
     return redirect(url_for('calendar'))
 
 

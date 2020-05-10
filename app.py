@@ -20,13 +20,6 @@ def entry_page():
     return render_template('entry_page.html', doctors=doctors)
 
 
-@app.route('/set_doctor/<doctor_id>')
-def set_doctor(doctor_id):
-    selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(doctor_id)})
-    print("selected doctor: ", selected_doctor)
-    return redirect(f"/calendar/{selected_doctor}")
-
-
 @app.route('/set_date/<date>')
 def set_date(date):
     timestamp = int(date)
@@ -40,7 +33,7 @@ def set_date(date):
 def calendar(selected_doctor_id, selected_date):
     if selected_doctor_id:
         selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(selected_doctor_id)})
-        calendar = build_calendar(selected_doctor)
+        calendar = build_calendar(selected_doctor, selected_date)
         doctors = mongo.db.doctors.find()
         patients = list(mongo.db.patients.find())
         day_id = mongo.db.days.find_one({"date": selected_date})["_id"]
@@ -54,12 +47,12 @@ def calendar(selected_doctor_id, selected_date):
         return redirect('/')
 
 
-def build_calendar(selected_doctor):
+def build_calendar(selected_doctor, selected_date):
     calendar = []
     with open('hours.json') as json_hours:
         hours = json.load(json_hours)
 
-    appointments = get_appointments(selected_doctor)
+    appointments = get_appointments(selected_doctor, selected_date)
     for hour in hours:
         appointment_times = []
         for i in range(4):
@@ -85,7 +78,7 @@ def build_calendar(selected_doctor):
     return calendar
 
 
-def get_appointments(selected_doctor):
+def get_appointments(selected_doctor, selected_date):
     filtered_appointments = []
     slot = mongo.db.days.find_one({"date": selected_date})
     if slot is None:

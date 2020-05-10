@@ -1,10 +1,4 @@
 $(document).ready(function() {
-   /** $(".remove").click(function(){
-        const id = $(this).attr("data-id");
-        const url = "/remove_appointment/".concat(id);
-        location.href=url;
-        })
-   **/
 
 const selectDoctorElement = $(".js-example-basic-single")
 $("#select-doc").on("click",function(){
@@ -63,24 +57,16 @@ $('#editAppointmentModal').on('show.bs.modal', function (event) {
     const modal = $(this);
     const id = slot.data('id')
     const dayId = $(".calendar-container").data("dayid")
-    console.log("SLot id: " + dayId)
     modal.find('.modal-body #startTime').text(startTime);
     modal.find('.modal-body #endTime').text(endTime); // Add the selected slot time to the modal input
     modal.find(".modal-body a").attr("href", `/remove_appointment/${id}/${dayId}`)
 })
 
+function setDoctorId(doctorId){
+    localStorage.setItem("selected_doctor_id", doctorId);
+}
 
 });
-     /****test***
-    var base = new Date("1980-01-01 09:30");
-    var test = new Date("1980-01-01 08:30:01");
 
-    if (test >= base){
-    console.log("test time is newer or equal to base time");
-
-}   else {
-    console.log ("test time is older than 9.30");
-
-}*/
 
 

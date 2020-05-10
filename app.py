@@ -20,17 +20,15 @@ def entry_page():
     return render_template('entry_page.html', doctors=doctors)
 
 
-@app.route('/set_date/<date>')
-def set_date(date):
-    timestamp = int(date)
-    global selected_date
-    selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
-    return redirect("/calendar")
-
-
 @app.route('/calendar/<selected_doctor_id>')
 @app.route('/calendar/<selected_doctor_id>/<selected_date>')
 def calendar(selected_doctor_id, selected_date):
+    if selected_date:
+        timestamp = int(selected_date)
+        selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
+    else:
+        selected_date = datetime.now().strftime("%d/%m/%Y")
+
     if selected_doctor_id:
         selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(selected_doctor_id)})
         calendar = build_calendar(selected_doctor, selected_date)

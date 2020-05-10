@@ -2,6 +2,7 @@ import os
 from flask import Flask, redirect, render_template, request, session, url_for
 from flask_pymongo import PyMongo
 from datetime import datetime
+from datetime import timedelta
 from bson.objectid import ObjectId
 import json
 
@@ -33,7 +34,7 @@ def set_doctor(doctor_id):
 @app.route('/set_date/<date>')
 def set_date(date):
     print("Url date: ", date)
-    timestamp = int(date) + 86400
+    timestamp = int(date)
     print("timestamp date", timestamp)
     global selected_date
     print("Set date1: ", selected_date)
@@ -96,6 +97,8 @@ def build_calendar():
 
 def get_appointments():
     filtered_appointments = []
+    with open('times.json') as json_times:
+        slot_times = json.load(json_times)
     slot = mongo.db.slots.find_one({"date": selected_date})
     if slot is None:
         mongo.db.slots.insert_one({"date": selected_date, "appointment_ids": []})
@@ -107,8 +110,13 @@ def get_appointments():
                       "doctor_id": selected_doctor["_id"]}]
         })
         if appointment is not None:
+
+            first_slot_index = slot_times.index(appointment["start_time"])
+            last_slot_index = slot_times.index(appointment["end_time"])
+            appointment_slots = slot_times[first_slot_index:last_slot_index + 1]
             patient = mongo.db.patients.find_one({"_id": ObjectId(appointment['patient_id'])})
-            appointment.update({'patient_details': patient})
+            appointment.update({'patient_details': patient, "appointment_slots": appointment_slots})
+            print("Appointment: ", appointment)
             filtered_appointments.append(appointment)
     return filtered_appointments
 
@@ -127,19 +135,12 @@ def search_appointments(appointments, time):
 def insert_appointment():
     start_time = request.form.get('start_time')
     end_time = request.form.get('end_time')
-    times = []
-    if start_time == end_time:
-        times.append({"time": start_time, "start_time": True, "end_time": True})
-    else:
-        times = get_times(start_time, end_time)
-
     appointments = mongo.db.appointments
     appointment_id = appointments.insert_one({
         "doctor_id": selected_doctor["_id"],
         "patient_id": request.form.get('patient_id'),
-        "times": times,
-        "start_time": start_time,
-        "end_time": end_time
+        "first_slot": start_time,
+        "last_slot": end_time
     }).inserted_id
 
     slots = mongo.db.slots

@@ -9,7 +9,7 @@ $(document).ready(function() {
         const selected_date = moment(date[0]).unix()
         setSelectedDate(selected_date);
         const doctor_id = getDoctorId();
-        location.href = `/set_date/${doctor_id}/${selected_date}`;
+        location.href = `/calendar/${doctor_id}/${selected_date}`;
     },
     onClose: function(){
         $('#flatpickr').blur()

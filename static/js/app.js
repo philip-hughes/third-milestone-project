@@ -7,7 +7,9 @@ $(document).ready(function() {
     yearSelectorType: 'static',
     onChange: function(date){
         const selected_date = moment(date[0]).unix()
-        location.href = `/set_date/${selected_date}`;
+        setSelectedDate(selected_date);
+        const doctor_id = getDoctorId();
+        location.href = `/set_date/${doctor_id}/${selected_date}`;
     },
     onClose: function(){
         $('#flatpickr').blur()
@@ -60,19 +62,29 @@ $("#select-doc").on("click",function(){
     const selectDoctorElement = $(".js-example-basic-single")
     const doctorId = selectDoctorElement.val();
     setDoctorId(doctorId); // set id in local storage
-    const selected_date = localStorage.getItem("selected_date");
-    if (selected_date === null) {
-        location.href = `/calendar/${doctorId}/${selected_date}`
-    else
+    const selected_date = getSelectedDate()
+    if (selected_date) {
+        location.href = `/calendar/${doctorId}/${selected_date}`;
+    }
+    else {
         location.href = `/calendar/${doctorId}`
     }
 })
 
-function setDoctorId(doctorId){
+function setDoctorId(doctorId) {
     localStorage.setItem("selected_doctor_id", doctorId);
+}
+
+function getDoctorId() {
+    return localStorage.getItem("selected_doctor_id")
+}
 
 function setSelectedDate(selectedDate){
     localStorage.setItem("selected_date", selectedDate);
+}
+
+function getSelectedDate(){
+    localStorage.getItem("selected_date")
 }
 
 });

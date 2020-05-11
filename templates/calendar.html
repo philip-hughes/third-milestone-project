@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 <nav class="row no-gutters">
     <div class="col-3">
-        <img class="doc-cal-image" src={{ selected_doctor.profile_picture }}>
-        <span class="doc-cal-name">{{selected_doctor.name}}</span>
+        <img class="doc-cal-image" src={{ selected_doctor.profile_picture}}>
+        <span class="doc-cal-name">{{ selected_doctor.name}}</span>
     </div>
     <div class="col-3">
             <select class="js-example-basic-single" name="doctor_id">
@@ -24,7 +24,7 @@
     <div class="col-3 datepicker-container">
         <input id="flatpickr" name="date" type="text" value={{ date }}>
     </div>
-     <div class="calendar-container  col-7" data-dayid={{ day_id }}>
+     <div class="calendar-container col-7" data-dayid={{ day_id }}>
      <div><span id="selected-date">{{ date }}</span></div>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">
@@ -73,13 +73,17 @@
       </div>
       <div class="modal-body">
         <form action="{{ url_for('insert_appointment') }}" method="POST">
+            <label for="doctorName">Doctor</label>
+            <input id="doctorName" type="text" name="doctor_id" value={{ selected_doctor._id }} readonly>
+            <label for="date">Date</label>
+            <input id="date" type="text" name="date" value={{ date }} readonly>
             <select class="js-example-basic-single" name="patient_id">
             {% for patient in patients %}
             <option value={{patient._id}}>{{patient.name}}</option>
             {% endfor %}
             </select>
             <label for="startTime">Start time</label>
-            <input id="startTime" type="text" name="start_time" value>
+            <input id="startTime" type="text" name="start_time" value readonly>
             <label for="endTime">End time</label>
             <select id="endTime" class="js-example-basic-single" name="end_time"></select>
             <button type="submit" name="action">Add appointment</button>

@@ -6,7 +6,8 @@ $(document).ready(function() {
     monthSelectorType: 'static',
     yearSelectorType: 'static',
     onChange: function(date){
-        const selected_date = moment(date[0]).unix()
+        //const selected_date = moment(date[0]).unix()
+        const selected_date = moment(date[0]).format('MM-DD-YYYY')
         setSelectedDate(selected_date);
         const doctor_id = getDoctorId();
         location.href = `/calendar/${doctor_id}/${selected_date}`;

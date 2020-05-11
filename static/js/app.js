@@ -25,7 +25,6 @@ $('#newAppointmentModal').on('show.bs.modal', function (event) {
     modal.find('#startTime').val(time); // Add the selected slot time to the modal input
     const otherSlots = $(".slot").map(function (){
         const slotTime = $(this).data("time")
-        console.log("other slot time:" + slotTime)
             const base = new Date("1980-01-01 " + time);
             const test = new Date("1980-01-01 " + slotTime);
             if ((test >= base)) {
@@ -52,9 +51,9 @@ $('#editAppointmentModal').on('show.bs.modal', function (event) {
     const modal = $(this);
     const id = slot.data('id')
     const dayId = $(".calendar-container").data("dayid")
+    modal.find('#appointment_id').val(id)
     modal.find('.modal-body #startTime').text(startTime);
     modal.find('.modal-body #endTime').text(endTime); // Add the selected slot time to the modal input
-    modal.find(".modal-body a").attr("href", `/remove_appointment/${id}/${dayId}`)
 })
 
 // Event handler for selecting a doctor via dropdown list

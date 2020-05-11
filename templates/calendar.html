@@ -74,7 +74,8 @@
       <div class="modal-body">
         <form action="{{ url_for('insert_appointment') }}" method="POST">
             <label for="doctorName">Doctor</label>
-            <input id="doctorName" type="text" name="doctor_id" value={{ selected_doctor._id }} readonly>
+            <span>{{ selected_doctor.name }}</span>
+            <input type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
             <label for="date">Date</label>
             <input id="date" type="text" name="date" value={{ date }} readonly>
             <select class="js-example-basic-single" name="patient_id">

@@ -23,11 +23,14 @@ def entry_page():
 @app.route('/calendar/<selected_doctor_id>')
 @app.route('/calendar/<selected_doctor_id>/<selected_date>')
 def calendar(selected_doctor_id=None, selected_date=None):
-    if selected_date:
-        timestamp = int(selected_date)
-        selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
-    else:
-        selected_date = datetime.now().strftime("%d/%m/%Y")
+   # if selected_date:
+     #   timestamp = int(selected_date)
+       # selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
+    #else:
+     #   selected_date = datetime.now().strftime("%d/%m/%Y")
+
+    if selected_date is None:
+       selected_date = datetime.now().strftime("%d-%m-%Y")
 
     if selected_doctor_id:
         selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(selected_doctor_id)})
@@ -35,12 +38,9 @@ def calendar(selected_doctor_id=None, selected_date=None):
         doctors = mongo.db.doctors.find()
         patients = list(mongo.db.patients.find())
         day_id = mongo.db.days.find_one({"date": selected_date})["_id"]
-        if selected_date == datetime.now().strftime("%d/%m/%Y"):
-            date = "Today"
-        else:
-            date = selected_date
+
         return render_template("calendar.html", calendar=calendar, patients=patients, day_id=day_id, doctors=doctors,
-                               selected_doctor=selected_doctor, date=date)
+                               selected_doctor=selected_doctor, date=selected_date)
     else:
         return redirect('/')
 
@@ -131,19 +131,20 @@ def search_appointments(appointments, time):
 def insert_appointment():
     start_time = request.form.get('start_time')
     end_time = request.form.get('end_time')
-    appointments = mongo.db.appointments
-    appointment_id = appointments.insert_one({
-        "doctor_id": selected_doctor["_id"],
+    doctor_id = request.form.get('doctor_id')
+    date = request.form.get('date')
+    appointment_id = mongo.db.appointments.insert_one({
+        "doctor_id": doctor_id,
         "patient_id": request.form.get('patient_id'),
         "first_slot": start_time,
         "last_slot": end_time
     }).inserted_id
 
-    mongo.db.days.update_one({'date': selected_date},
+    mongo.db.days.update_one({'date': date},
                      {"$push": {"appointment_ids": str(appointment_id)}}
                      )
 
-    return redirect(url_for('calendar'))
+    return redirect(f"/calendar/{doctor_id}/{date}")
 
 
 @app.route("/updateAppointment", methods=["POST"])

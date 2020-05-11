@@ -9,10 +9,10 @@ $(document).ready(function() {
         const selected_date = moment(date[0]).unix()
         setSelectedDate(selected_date);
         const doctor_id = getDoctorId();
-        location.href = `/calendar/${doctor_id}/${selected_date}`;
+        location.href = `/set_date/${doctor_id}/${selected_date}`;
     },
     onClose: function(){
-        $('#flatpickr').blur()
+        $('#flatpickr').blur() // Necessary to fix flatpickr bug that causes picker to open automatically
     }
    });
 
@@ -57,11 +57,16 @@ $('#editAppointmentModal').on('show.bs.modal', function (event) {
     modal.find(".modal-body a").attr("href", `/remove_appointment/${id}/${dayId}`)
 })
 
-
+// Event handler for selecting a doctor
 $("#select-doc").on("click",function(){
     const selectDoctorElement = $(".js-example-basic-single")
     const doctorId = selectDoctorElement.val();
-    setDoctorId(doctorId); // set id in local storage
+    changeDoctor(doctorId)
+
+})
+
+function changeDoctor(doctorId){
+    setDoctorId(doctorId); // add doctor id to local storage
     const selected_date = getSelectedDate()
     if (selected_date) {
         location.href = `/calendar/${doctorId}/${selected_date}`;
@@ -69,7 +74,7 @@ $("#select-doc").on("click",function(){
     else {
         location.href = `/calendar/${doctorId}`
     }
-})
+}
 
 function setDoctorId(doctorId) {
     localStorage.setItem("selected_doctor_id", doctorId);

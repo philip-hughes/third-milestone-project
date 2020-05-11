@@ -86,14 +86,12 @@ def get_appointments(selected_doctor, selected_date):
     for appointment_id in appointment_ids:
         appointment = mongo.db.appointments.find_one({
             '$and': [{"_id": ObjectId(appointment_id),
-                      "doctor_id": selected_doctor }]
+                      "doctor_id": str(selected_doctor['_id'])}]
         })
         if appointment is not None:
-
             appointment_slots = get_times(appointment['first_slot'], appointment['last_slot'])
             patient = mongo.db.patients.find_one({"_id": ObjectId(appointment['patient_id'])})
             appointment.update({'patient_details': patient, "appointment_slots": appointment_slots})
-            print("Appointment: ", appointment)
             filtered_appointments.append(appointment)
     return filtered_appointments
 

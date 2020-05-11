@@ -74,6 +74,7 @@ $(".doc-wrapper").on("click",function(){
 function changeDoctor(doctorId){
     setDoctorId(doctorId); // add doctor id to local storage
     const selected_date = getSelectedDate()
+    console.log("selected date:" + selected_date)
     if (selected_date) {
         location.href = `/calendar/${doctorId}/${selected_date}`;
     }
@@ -95,7 +96,7 @@ function setSelectedDate(selectedDate){
 }
 
 function getSelectedDate(){
-    localStorage.getItem("selected_date")
+   return localStorage.getItem("selected_date")
 }
 
 });

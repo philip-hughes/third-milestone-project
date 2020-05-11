@@ -111,13 +111,14 @@
           <form action="{{ url_for('remove_appointment') }}" method="POST">
             <label for="doctorName">Doctor</label>
             <span>{{ selected_doctor.name }}</span>
-            <input type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
             <label for="date">Date</label>
             <input id="date" type="text" name="date" value={{ date }} readonly>
             <label for="startTime">Start time</label>
             <span id="startTime"></span>
             <label for="endTime">End time</label>
             <span id="endTime"></span>
+            <input type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
+            <input id="appointment_id" type="hidden" name="appointment_id" value>
       <button type="submit" name="action">Cancel appointment</button>
           </form>
       </div>

@@ -22,7 +22,7 @@ def entry_page():
 
 @app.route('/calendar/<selected_doctor_id>')
 @app.route('/calendar/<selected_doctor_id>/<selected_date>')
-def calendar(selected_doctor_id, selected_date):
+def calendar(selected_doctor_id=None, selected_date=None):
     if selected_date:
         timestamp = int(selected_date)
         selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')

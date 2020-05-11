@@ -78,11 +78,11 @@ def build_calendar(selected_doctor, selected_date):
 
 def get_appointments(selected_doctor, selected_date):
     filtered_appointments = []
-    slot = mongo.db.days.find_one({"date": selected_date})
-    if slot is None:
+    day = mongo.db.days.find_one({"date": selected_date})
+    if day is None:
         mongo.db.days.insert_one({"date": selected_date, "appointment_ids": []})
-        slot = mongo.db.days.find_one({"date": selected_date})
-    appointment_ids = slot["appointment_ids"]
+        day = mongo.db.days.find_one({"date": selected_date})
+    appointment_ids = day["appointment_ids"]
     for appointment_id in appointment_ids:
         appointment = mongo.db.appointments.find_one({
             '$and': [{"_id": ObjectId(appointment_id),

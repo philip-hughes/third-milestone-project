@@ -57,13 +57,19 @@ $('#editAppointmentModal').on('show.bs.modal', function (event) {
     modal.find(".modal-body a").attr("href", `/remove_appointment/${id}/${dayId}`)
 })
 
-// Event handler for selecting a doctor
+// Event handler for selecting a doctor via dropdown list
 $("#select-doc").on("click",function(){
     const selectDoctorElement = $(".js-example-basic-single")
     const doctorId = selectDoctorElement.val();
     changeDoctor(doctorId)
-
 })
+
+// Event handler for selecting a doctor via entry page divs
+$(".doc-wrapper").on("click",function(){
+    const doctorId = $(this).data("docid")
+    changeDoctor(doctorId)
+})
+
 
 function changeDoctor(doctorId){
     setDoctorId(doctorId); // add doctor id to local storage

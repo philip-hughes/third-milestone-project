@@ -2,7 +2,7 @@
 <div class="row no-gutters">
 {% for doctor in doctors %}
 <div class="col-3">
-    <a href={{ url_for('set_doctor', doctor_id = doctor._id) }}>
+    <div class="doc-wrapper" data-docid={{ doctor._id }}>
         <img class="doc-entry-image" src={{ doctor.profile_picture }}>
         <span class="doc-entry-name">{{doctor.name}}</span>
     </a>

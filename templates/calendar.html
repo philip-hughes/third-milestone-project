@@ -88,7 +88,7 @@
             <label for="endTime">End time</label>
             <select id="endTime" class="js-example-basic-single" name="end_time"></select>
             <button type="submit" name="action">Add appointment</button>
-</form>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -108,13 +108,18 @@
         </button>
       </div>
       <div class="modal-body">
+          <form action="{{ url_for('remove_appointment') }}" method="POST">
             <label for="doctorName">Doctor</label>
-            <span id="doctorName">{{ selected_doctor["name"] }}</span>
+            <span>{{ selected_doctor.name }}</span>
+            <input type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
+            <label for="date">Date</label>
+            <input id="date" type="text" name="date" value={{ date }} readonly>
             <label for="startTime">Start time</label>
             <span id="startTime"></span>
             <label for="endTime">End time</label>
             <span id="endTime"></span>
-      <a href>Cancel appointment</a>
+      <button type="submit" name="action">Cancel appointment</button>
+          </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

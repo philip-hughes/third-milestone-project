@@ -21,8 +21,7 @@ $('#newAppointmentModal').on('show.bs.modal', function (event) {
     const slot = $(event.relatedTarget); // Slot that triggered the modal
     const time = slot.data('time');
     const modal = $(this);
-    modal.find('.modal-body input').val(time); // Add the selected slot time to the modal input
-
+    modal.find('#startTime').val(time); // Add the selected slot time to the modal input
     const otherSlots = $(".slot").map(function (){
         const slotTime = $(this).data("time")
         console.log("other slot time:" + slotTime)

@@ -156,13 +156,15 @@ def update_appointment():
     return redirect(url_for('index'))
 
 
-@app.route("/remove_appointment/<appointmentId>/<dayId>")
-def remove_appointment(appointmentId, dayId):
-    print("appId", appointmentId)
-    mongo.db.appointments.delete_one({"_id": ObjectId(appointmentId)})
-    print("dayId", dayId)
-    mongo.db.days.update_one({"_id": ObjectId(dayId)}, {"$pull": {"appointment_ids": appointmentId}})
-    return redirect(url_for('calendar'))
+@app.route("/remove_appointment", methods=["POST"])
+def remove_appointment():
+    doctor_id = request.form.get('doctor_id')
+    date = request.form.get('date')
+    appointment_id = request.form.get('appointment_id')
+    day_id = request.form.get('day_id')
+    mongo.db.appointments.delete_one({"_id": ObjectId(appointment_id)})
+    mongo.db.days.update_one({"_id": ObjectId(day_id)}, {"$pull": {"appointment_ids": appointment_id}})
+    return redirect(f"/calendar/{doctor_id}/{date}")
 
 
 @app.route('/addPatient')

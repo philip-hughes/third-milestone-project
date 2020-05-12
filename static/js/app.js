@@ -50,7 +50,9 @@ $('#editAppointmentModal').on('show.bs.modal', function (event) {
     const endTime = moment.utc(slot.data('end'),'HH:mm').add(15,'minutes').format('HH:mm')
     const modal = $(this);
     const id = slot.data('id')
-    const dayId = $(".calendar-container").data("dayid")
+    const dayId = $(".calendar-container").data('dayid')
+
+    modal.find('#day_id').val(dayId)
     modal.find('#appointment_id').val(id)
     modal.find('.modal-body #startTime').text(startTime);
     modal.find('.modal-body #endTime').text(endTime); // Add the selected slot time to the modal input

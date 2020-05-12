@@ -53,6 +53,7 @@ nav {
 }
 /*********Appointments grid**************/
 #selected-date {
+  display: inline-block;
   color: white;
   background-color: #569ff7;
   border-radius: 2px;

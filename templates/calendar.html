@@ -21,11 +21,15 @@
     </div>
 </nav>
 <div class="row no-gutters main-container">
-    <div class="col-3 datepicker-container">
+    <div id="sidebar" class="col-3 datepicker-container ">
         <input id="flatpickr" name="date" type="text" value={{ date }}>
     </div>
      <div class="calendar-container col-7" data-dayid={{ day_id }}>
      <div><span id="selected-date">{{ date }}</span></div>
+     <button type="button" id="sidebarCollapse" class="btn btn-info">
+         <i class="fas fa-align-left"></i>
+        <span>Toggle Sidebar</span>
+</button>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">
                 <div class="col-1 hour"><div>{{hour.hour}}</div></div>

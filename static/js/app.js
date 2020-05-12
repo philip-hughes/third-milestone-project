@@ -17,6 +17,10 @@ $(document).ready(function() {
     }
    });
 
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+
 
 $('#newAppointmentModal').on('show.bs.modal', function (event) {
     const slot = $(event.relatedTarget); // Slot that triggered the modal

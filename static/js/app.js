@@ -21,6 +21,20 @@ $(document).ready(function() {
         $('#sidebar').toggleClass('active');
     });
 
+        window.matchMedia('(min-width: 819px)').addListener(function(e){
+        if (e.matches) {
+            $('#sidebar').toggleClass('active')
+        }
+        else{
+            $('#sidebar').toggleClass('active')
+            }
+        })
+
+
+
+
+
+
 
 $('#newAppointmentModal').on('show.bs.modal', function (event) {
     const slot = $(event.relatedTarget); // Slot that triggered the modal

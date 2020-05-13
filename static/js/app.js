@@ -21,9 +21,9 @@ $(document).ready(function() {
         $('#sidebar').toggleClass('active');
     });
 
-        window.matchMedia('(min-width: 819px)').addListener(function(e){
+    window.matchMedia('(min-width: 819px)').addListener(function(e){
         if (e.matches) {
-            $('#sidebar').toggleClass('active')
+            $('#sidebar').removeClass('active')
         }
         else{
             $('#sidebar').toggleClass('active')

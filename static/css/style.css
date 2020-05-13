@@ -48,16 +48,23 @@ nav {
   margin-left: 25px;
 
 }
+@media(max-width:965px) {
+  .calendar-container {
+      max-width: 54vw;
+}}
 
-.calendar-container {
-  margin-left: 25px;
-  max-width: 61vw;
+
+/*********Sidebar**************/
+@media(max-width: 966px){
+  #sidebar {
+    position: absolute;
+    z-index: 9999;
+    /*height: 1038px;*/
+  }
 }
 
-@media(max-width:965px) {
-.calendar-container {
-max-width: 54vw;
-}}
+
+
 /*********Appointments grid**************/
 #selected-date {
   display: inline-block;
@@ -71,6 +78,11 @@ max-width: 54vw;
 .main-container {
   padding-top: 10px;
   margin: 0 auto;
+}
+
+.calendar-container {
+  margin-left: 25px;
+  max-width: 61vw;
 }
 
 .hour-container {

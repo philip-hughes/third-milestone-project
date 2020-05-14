@@ -53,9 +53,12 @@ nav {
 
 .datepicker-container {
   margin-left: 25px;
-
 }
 
+#datepicker-close {
+  width: 308px;
+  background-color: white;
+}
 
 /*********Sidebar**************/
 @media(max-width: 790px){

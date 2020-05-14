@@ -14,6 +14,10 @@ nav {
   border-bottom: 1px solid #d8e1e9 ;
 }
 
+.select-doc-wrapper {
+    position: fixed;
+    right: 15px;
+}
 .doc-cal-image {
   box-sizing: content-box;
   height: 80px;

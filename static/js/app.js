@@ -21,12 +21,12 @@ $(document).ready(function() {
         $('#sidebar').toggleClass('active');
     });
 
-    window.matchMedia('(min-width: 791px)').addListener(function(e){
+    window.matchMedia('(max-width: 791px)').addListener(function(e){
         if (e.matches) {
-            $('#sidebar').removeClass('active')
+            $('#sidebar').toggleClass('active')
         }
         else{
-            $('#sidebar').toggleClass('active')
+            $('#sidebar').removeClass('active')
             }
         })
 

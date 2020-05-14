@@ -21,18 +21,18 @@
     </div>
 </nav>
 <div class="row no-gutters main-container">
-    <div id="sidebar" class="col-3 datepicker-container ">
+    <div id="sidebar" class="datepicker-container">
         <input id="flatpickr" name="date" type="text" value={{ date }}>
     </div>
-     <div class="calendar-container col-7" data-dayid={{ day_id }}>
+     <div class="calendar-container" data-dayid={{ day_id }}>
      <div id="selected-date"><span>{{ date }}</span></div>
      <button type="button" id="sidebarCollapse" class="btn btn-info">
          <i class="far fa-calendar-alt"></i>
      </button>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">
-                <div class="col-1 hour"><div>{{hour.hour}}</div></div>
-            	<div class="col-11">
+                <div class="hour"><div>{{hour.hour}}</div></div>
+            	<div class="slot-wrapper">
                 {% for time in hour.times %}
                     {% if time.empty == True %}
                     <div class="row no-gutters slot free-time" data-toggle="modal" data-target="#newAppointmentModal" data-time={{ time.time }}>

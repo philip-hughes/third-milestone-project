@@ -46,9 +46,9 @@ nav {
   margin-left: 25px;
 
 }
-@media(max-width:965px) {
+@media(max-width:955px) {
   .calendar-container {
-      max-width: 54vw;
+      max-width: 55vw;
 }}
 
 
@@ -107,7 +107,7 @@ nav {
 }
 
 .slot-wrapper {
-  width: 90%;
+  width: 84%;
 }
 
 .slot {

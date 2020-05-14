@@ -49,7 +49,7 @@ nav {
 
 
 /*********Sidebar**************/
-@media(max-width: 766px){
+@media(max-width: 790px){
   #sidebar {
     position: absolute;
     z-index: 9999;

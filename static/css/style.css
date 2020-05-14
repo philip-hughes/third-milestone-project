@@ -33,8 +33,6 @@ nav {
     margin-left: -310px;
 }
 
-
-
 #flatpickr {
   display: none;
 }
@@ -55,7 +53,7 @@ nav {
 
 
 /*********Sidebar**************/
-@media(max-width: 966px){
+@media(max-width: 766px){
   #sidebar {
     position: absolute;
     z-index: 9999;
@@ -81,8 +79,9 @@ nav {
 }
 
 .calendar-container {
-  margin-left: 25px;
-  max-width: 61vw;
+  margin-left: 2vw;
+  /*max-width: 61vw;*/
+  width: 63vw;
 }
 
 .hour-container {
@@ -95,8 +94,9 @@ nav {
   border-bottom: 1px solid white;
   border-radius: 3px;
   height: 100px;
- /* min-width: 54px;*/
-  max-width: 55px;
+  width: 12%;
+ /* min-width: 54px
+  max-width: 55px;;*/
   position: relative;
   text-align: center;
 }
@@ -104,15 +104,17 @@ nav {
 .hour div {
   position: relative;
   top: 37%;
-
-
 }
 
+.slot-wrapper {
+  width: 90%;
+}
 
 .slot {
   height: 25%;
   margin-left: 5px;
 }
+
 .slot:hover {
     cursor: pointer;
 }

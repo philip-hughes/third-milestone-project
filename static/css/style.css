@@ -57,7 +57,9 @@ nav {
   }
 }
 
-
+#sidebarCollapse {
+  display: none;
+}
 
 /*********Appointments grid**************/
 #selected-date {
@@ -88,7 +90,11 @@ nav {
 @media(max-width:790px) {
   .calendar-container {
      width: 98vw;
-}}
+  }
+  #sidebarCollapse {
+  display: inline-block;
+}
+}
 
 
 

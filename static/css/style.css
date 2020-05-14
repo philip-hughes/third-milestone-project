@@ -46,10 +46,6 @@ nav {
   margin-left: 25px;
 
 }
-@media(max-width:955px) {
-  .calendar-container {
-      max-width: 55vw;
-}}
 
 
 /*********Sidebar**************/
@@ -83,6 +79,18 @@ nav {
   /*max-width: 61vw;*/
   width: 63vw;
 }
+
+@media(max-width:955px) {
+  .calendar-container {
+    width: 55vw;
+}}
+
+@media(max-width:790px) {
+  .calendar-container {
+     width: 98vw;
+}}
+
+
 
 .hour-container {
     height: 100px;

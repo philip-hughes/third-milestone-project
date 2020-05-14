@@ -21,7 +21,7 @@ $(document).ready(function() {
         $('#sidebar').toggleClass('active');
     });
 
-    window.matchMedia('(min-width: 966px)').addListener(function(e){
+    window.matchMedia('(min-width: 790px)').addListener(function(e){
         if (e.matches) {
             $('#sidebar').removeClass('active')
         }

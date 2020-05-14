@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 <nav class="row no-gutters">
-    <div class="col-3">
+    <div class=" profile-wrapper">
         <img class="doc-cal-image" src={{ selected_doctor.profile_picture}}>
         <span class="doc-cal-name">{{ selected_doctor.name}}</span>
     </div>
-    <div class="col-3">
+    <div class="select-doc-wrapper">
             <select class="js-example-basic-single" name="doctor_id">
             {% for doctor in doctors %}
                {% if doctor._id == selected_doctor._id %}

@@ -58,15 +58,20 @@ nav {
 #datepicker-close {
   width: 308px;
   background-color: white;
+  display: none; /* only displayed in screenwidths below 790px*/
 }
 
 /*********Sidebar**************/
-@media(max-width: 790px){
+@media(max-width: 791px){
   #sidebar {
     position: absolute;
     z-index: 9999;
     /*height: 1038px;*/
   }
+
+  #datepicker-close {
+  display: block;
+}
 }
 
 #sidebarCollapse {
@@ -99,16 +104,14 @@ nav {
     width: 55vw;
 }}
 
-@media(max-width:790px) {
+@media(max-width:791px) {
   .calendar-container {
      width: 98vw;
   }
-  #sidebarCollapse {
+  .sidebarCollapse {
   display: inline-block;
 }
 }
-
-
 
 .hour-container {
     height: 100px;

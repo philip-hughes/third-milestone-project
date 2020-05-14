@@ -80,7 +80,7 @@ nav {
   width: 63vw;
 }
 
-@media(max-width:955px) {
+@media(max-width:956px) {
   .calendar-container {
     width: 55vw;
 }}

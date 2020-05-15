@@ -5,6 +5,7 @@
         <div class="doc-cal-name">{{ selected_doctor.name}}</div>
     </div>
     <div class="select-doc-wrapper">
+            <span>Doctor: </span>
             <select class="js-example-basic-single" name="doctor_id">
             {% for doctor in doctors %}
                {% if doctor._id == selected_doctor._id %}
@@ -20,7 +21,7 @@
 <div class="row no-gutters main-container">
     <div id="sidebar" class="datepicker-container">
         <input id="flatpickr" name="date" type="text" value={{ date }}>
-        <div  id="datepicker-close"><button class="sidebarCollapse">Close</button></div>
+        <div id="datepicker-close"><button class="sidebarCollapse">Close</button></div>
     </div>
      <div class="calendar-container" data-dayid={{ day_id }}>
      <div id="selected-date"><span>{{ date }}</span></div>

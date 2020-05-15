@@ -93,7 +93,7 @@
             <i class="far fa-clock"></i>
             <input class="modal-input" id="startTime" type="text" name="start_time" value readonly>
             <select id="endTime" class="js-example-basic-single" name="end_time"></select>
-            <button type="submit" name="action">Add appointment</button>
+            <button id="add-appointment" type="submit" name="action">Add appointment</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -117,8 +117,10 @@
           <form action="{{ url_for('remove_appointment') }}" method="POST">
             <i class="fas fa-user-md"></i>
             <span>{{ selected_doctor.name }}</span>
-            <i class="far fa-calendar-alt"></i>
-            <input class="modal-input" id="date" type="text" name="date" value={{ date }} readonly>
+            <div class="modal-date">
+                <i class="far fa-calendar-alt"></i>
+                <input class="modal-input" id="date" type="text" name="date" value={{ date }} readonly>
+            </div>
             <i class="far fa-clock"></i>
             <span id="startTime"></span>
             <span id="endTime"></span>

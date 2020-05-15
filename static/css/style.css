@@ -72,6 +72,9 @@ nav {
   #datepicker-close {
   display: block;
 }
+  .datepicker-container {
+  margin-left: 0;
+}
 }
 
 .sidebarCollapse {

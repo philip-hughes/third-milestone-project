@@ -196,6 +196,14 @@ nav {
   outline: none;
 }
 
+#add-appointment {
+  display: block;
+}
+
+#startTime {
+  width: 40px;
+}
+
 /*
 .nav-tabs {
   border-bottom: 1px solid #dddddd;

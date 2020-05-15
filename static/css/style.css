@@ -15,12 +15,12 @@ nav {
 }
 
 .doc-profile-wrapper {
-    position: fixed;
+    position: relative;
     left: 15px;
 }
 
 .select-doc-wrapper {
-    position: fixed;
+    position: relative;
     right: 15px;
 }
 .doc-cal-image {

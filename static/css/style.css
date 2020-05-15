@@ -22,6 +22,7 @@ nav {
 .select-doc-wrapper {
     position: absolute;
     right: 15px;
+    top: 15px;
 }
 .doc-cal-image {
   box-sizing: content-box;

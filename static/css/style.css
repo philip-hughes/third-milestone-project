@@ -196,7 +196,7 @@ nav {
   outline: none;
 }
 
-#add-appointment {
+#add-appointment, #cancel-appointment {
   display: block;
 }
 

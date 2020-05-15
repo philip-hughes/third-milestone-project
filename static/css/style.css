@@ -204,6 +204,11 @@ nav {
   width: 40px;
 }
 
+.modal select {
+  border: none;
+  outline: none;
+}
+
 /*
 .nav-tabs {
   border-bottom: 1px solid #dddddd;

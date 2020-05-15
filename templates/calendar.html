@@ -92,6 +92,7 @@
             </div>
             <i class="far fa-clock"></i>
             <input class="modal-input" id="startTime" type="text" name="start_time" value readonly>
+            <span>-</span>
             <select id="endTime" class="js-example-basic-single" name="end_time"></select>
             <button id="add-appointment" type="submit" name="action">Add appointment</button>
         </form>
@@ -123,6 +124,7 @@
             </div>
             <i class="far fa-clock"></i>
             <span id="startTime"></span>
+            <span>-</span>
             <span id="endTime"></span>
             <input class="modal-input" type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
             <input class="modal-input" id="appointment_id" type="hidden" name="appointment_id" value>

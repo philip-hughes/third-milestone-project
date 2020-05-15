@@ -78,13 +78,18 @@
             <label for="doctorName">Doctor</label>
             <span>{{ selected_doctor.name }}</span>
             <input type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
-            <label for="date">Date</label>
-            <input id="date" type="text" name="date" value={{ date }} readonly>
-            <select class="js-example-basic-single" name="patient_id">
-            {% for patient in patients %}
-            <option value={{patient._id}}>{{patient.name}}</option>
-            {% endfor %}
-            </select>
+            <div class="modal-date">
+                <label for="date">Date</label>
+                <input id="date" type="text" name="date" value={{ date }} readonly>
+            </div>
+            <div class="modal-new-patient">
+                <span>Patient: </span>
+                <select class="js-example-basic-single" name="patient_id">
+                {% for patient in patients %}
+                <option value={{patient._id}}>{{patient.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
             <label for="startTime">Start time</label>
             <input id="startTime" type="text" name="start_time" value readonly>
             <label for="endTime">End time</label>

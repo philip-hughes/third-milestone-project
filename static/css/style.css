@@ -218,6 +218,10 @@ nav {
   display: inline-block;
 }
 
+.modal-date #date {
+  width: 90px;
+}
+
 /*
 .nav-tabs {
   border-bottom: 1px solid #dddddd;

@@ -62,7 +62,7 @@ nav {
 }
 
 /*********Sidebar**************/
-@media(max-width: 791px){
+@media(max-width: 798px){
   #sidebar {
     position: absolute;
     z-index: 9999;
@@ -107,7 +107,7 @@ nav {
     width: 54vw;
 }}
 
-@media(max-width:791px) {
+@media(max-width:798px) {
   .calendar-container {
      width: 98vw;
   }

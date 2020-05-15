@@ -10,7 +10,6 @@ $(document).ready(function() {
         const selected_date = moment(date[0]).format('DD-MM-YYYY')
         setSelectedDate(selected_date);
         const doctor_id = getDoctorId();
-
         location.href = `/calendar/${doctor_id}/${selected_date}`;
 
     },
@@ -23,13 +22,14 @@ $(document).ready(function() {
         $('#sidebar').toggleClass('active');
     });
 
-    // Close the sidebar on page load if screenwidth is <= 791
-    if ($(window).width() <= 791) {
-        $('#sidebar').toggleClass('active')
-    }
+    // Close the sidebar on page load if screenwidth is <= 798.
+        if ($(window).width() <= 798) {
+            $('#sidebar').toggleClass('active')
+        }
+
 
     // Open / close the sidebar when screen is resized around the specified breakpoint
-    window.matchMedia('(max-width: 791px)').addListener(function(e){
+    window.matchMedia('(max-width: 798px)').addListener(function(e){
         if (e.matches) {
             $('#sidebar').toggleClass('active')
         }

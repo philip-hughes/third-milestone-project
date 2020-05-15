@@ -24,6 +24,11 @@ nav {
     right: 15px;
     top: 15px;
 }
+
+.select-doc-wrapper button {
+  border: none;
+  background-color: #dceded;
+}
 .doc-cal-image {
   box-sizing: content-box;
   height: 50px;

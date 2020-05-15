@@ -75,24 +75,23 @@
       </div>
       <div class="modal-body">
         <form action="{{ url_for('insert_appointment') }}" method="POST">
-            <label for="doctorName">Doctor</label>
+            <i class="fas fa-user-md"></i>
             <span>{{ selected_doctor.name }}</span>
             <input class="modal-input" type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
             <div class="modal-date">
-                <label for="date">Date</label>
+                <i class="far fa-calendar-alt"></i>
                 <input class="modal-input" id="date" type="text" name="date" value={{ date }} readonly>
             </div>
             <div class="modal-new-patient">
-                <span>Patient: </span>
+                <i class="fas fa-user-injured"></i>
                 <select class="js-example-basic-single" name="patient_id">
                 {% for patient in patients %}
                 <option value={{patient._id}}>{{patient.name}}</option>
                 {% endfor %}
                 </select>
             </div>
-            <label for="startTime">Start time</label>
+            <i class="far fa-clock"></i>
             <input class="modal-input" id="startTime" type="text" name="start_time" value readonly>
-            <label for="endTime">End time</label>
             <select id="endTime" class="js-example-basic-single" name="end_time"></select>
             <button type="submit" name="action">Add appointment</button>
         </form>
@@ -116,13 +115,12 @@
       </div>
       <div class="modal-body">
           <form action="{{ url_for('remove_appointment') }}" method="POST">
-            <label for="doctorName">Doctor</label>
+            <i class="fas fa-user-md"></i>
             <span>{{ selected_doctor.name }}</span>
-            <label for="date">Date</label>
+            <i class="far fa-calendar-alt"></i>
             <input class="modal-input" id="date" type="text" name="date" value={{ date }} readonly>
-            <label for="startTime">Start time</label>
+            <i class="far fa-clock"></i>
             <span id="startTime"></span>
-            <label for="endTime">End time</label>
             <span id="endTime"></span>
             <input class="modal-input" type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
             <input class="modal-input" id="appointment_id" type="hidden" name="appointment_id" value>

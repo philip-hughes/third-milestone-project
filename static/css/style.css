@@ -214,6 +214,10 @@ nav {
   border-radius: 2px;
 }
 
+.modal-date, .modal-time {
+  display: inline-block;
+}
+
 /*
 .nav-tabs {
   border-bottom: 1px solid #dddddd;

@@ -209,6 +209,11 @@ nav {
   outline: none;
 }
 
+.modal select:hover {
+  background-color: lightblue;
+  border-radius: 2px;
+}
+
 /*
 .nav-tabs {
   border-bottom: 1px solid #dddddd;

@@ -10,7 +10,7 @@
 
 /*********Nav bar************************/
 nav {
-  height: 63px;
+  height: 75px;
   border-bottom: 1px solid #d8e1e9 ;
 }
 
@@ -38,6 +38,9 @@ nav {
   padding-top: 5px;
 }
 
+.doc-cal-name {
+  font-size: 12px;
+}
 /*********Date picker********************/
 #sidebar {
     min-width: 310px;

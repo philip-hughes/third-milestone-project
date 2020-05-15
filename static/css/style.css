@@ -190,6 +190,12 @@ nav {
   border-radius: 5px;
 }
 
+/*********Modals**************/
+.modal-input {
+  border: none;
+  outline: none;
+}
+
 /*
 .nav-tabs {
   border-bottom: 1px solid #dddddd;

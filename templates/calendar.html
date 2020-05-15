@@ -77,10 +77,10 @@
         <form action="{{ url_for('insert_appointment') }}" method="POST">
             <label for="doctorName">Doctor</label>
             <span>{{ selected_doctor.name }}</span>
-            <input type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
+            <input class="modal-input" type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
             <div class="modal-date">
                 <label for="date">Date</label>
-                <input id="date" type="text" name="date" value={{ date }} readonly>
+                <input class="modal-input" id="date" type="text" name="date" value={{ date }} readonly>
             </div>
             <div class="modal-new-patient">
                 <span>Patient: </span>
@@ -91,7 +91,7 @@
                 </select>
             </div>
             <label for="startTime">Start time</label>
-            <input id="startTime" type="text" name="start_time" value readonly>
+            <input class="modal-input" id="startTime" type="text" name="start_time" value readonly>
             <label for="endTime">End time</label>
             <select id="endTime" class="js-example-basic-single" name="end_time"></select>
             <button type="submit" name="action">Add appointment</button>
@@ -119,14 +119,14 @@
             <label for="doctorName">Doctor</label>
             <span>{{ selected_doctor.name }}</span>
             <label for="date">Date</label>
-            <input id="date" type="text" name="date" value={{ date }} readonly>
+            <input class="modal-input" id="date" type="text" name="date" value={{ date }} readonly>
             <label for="startTime">Start time</label>
             <span id="startTime"></span>
             <label for="endTime">End time</label>
             <span id="endTime"></span>
-            <input type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
-            <input id="appointment_id" type="hidden" name="appointment_id" value>
-            <input id="day_id" type="hidden" name="day_id" value>
+            <input class="modal-input" type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
+            <input class="modal-input" id="appointment_id" type="hidden" name="appointment_id" value>
+            <input class="modal-input" id="day_id" type="hidden" name="day_id" value>
             <button type="submit" name="action">Cancel appointment</button>
           </form>
       </div>

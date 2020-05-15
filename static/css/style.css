@@ -10,7 +10,7 @@
 
 /*********Nav bar************************/
 nav {
-  height: 112px;
+  height: 63px;
   border-bottom: 1px solid #d8e1e9 ;
 }
 
@@ -26,8 +26,8 @@ nav {
 }
 .doc-cal-image {
   box-sizing: content-box;
-  height: 80px;
-  width: 80px;
+  height: 50px;
+  width: 50px;
   border-radius: 100%;
   padding-left: 10px;
   padding-top: 5px;

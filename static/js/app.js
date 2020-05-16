@@ -20,6 +20,7 @@ $(document).ready(function() {
 
     $('.sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
+        $('.overlay').toggleClass('active');
     });
 
     // Close the sidebar on page load if screenwidth is <= 798.
@@ -35,13 +36,9 @@ $(document).ready(function() {
         }
         else{
             $('#sidebar').removeClass('active')
+            $('.overlay').removeClass('active');
             }
         })
-
-
-
-
-
 
 
 $('#newAppointmentModal').on('show.bs.modal', function (event) {
@@ -67,11 +64,15 @@ $('#newAppointmentModal').on('show.bs.modal', function (event) {
             endTimeList.append(`<option value=${slotTime}>${displayTime}</option>`)}
         else { break;}
           }
+})
 
+$('#add-appointment').on('click',function(){
+    console.log("Test")
 })
 
 $('#editAppointmentModal').on('show.bs.modal', function (event) {
     const slot = $(event.relatedTarget); // Slot that triggered the modal
+    //console.log($(slot).children('.patient-name').innerText())
     const startTime = slot.data('start');
     const endTime = moment.utc(slot.data('end'),'HH:mm').add(15,'minutes').format('HH:mm')
     const modal = $(this);

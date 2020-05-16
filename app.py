@@ -53,7 +53,7 @@ def build_calendar(selected_doctor, selected_date):
     appointments = get_appointments(selected_doctor, selected_date)
     for hour in hours:
         appointment_times = []
-        for i in range(4):
+        for i in range(len(hour["times"])):
             time = hour["times"][i]
             appointment = search_appointments(appointments, time)
             if appointment is not None:

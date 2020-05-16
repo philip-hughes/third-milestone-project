@@ -132,9 +132,18 @@
             </div>
             <div class="modal-time">
                 <i class="far fa-clock"></i>
-                <span id="startTime"></span>
+                <input class="modal-input" id="startTime" type="text" name="start_time" value readonly>
                 <span>-</span>
-                <span id="endTime"></span>
+                <select id="endTime" class="js-example-basic-single" name="end_time"></select>
+            </div>
+            <div class="modal-new-patient">
+                <i class="fas fa-user-injured"></i>
+                <select class="js-example-basic-single required" name="patient_id">
+                <option value="" disabled="disabled" selected>Select patient</option>
+                {% for patient in patients %}
+                <option value={{patient._id}}>{{patient.name}}</option>
+                {% endfor %}
+                </select>
             </div>
             <input class="modal-input" type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
             <input class="modal-input" id="appointment_id" type="hidden" name="appointment_id" value>

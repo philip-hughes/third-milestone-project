@@ -149,7 +149,7 @@ def update_appointment():
 
 
 @app.route("/remove_appointment", methods=["POST"])
-def remove_appointment():
+def delete_appointment():
     doctor_id = request.form.get('doctor_id')
     date = request.form.get('date')
     appointment_id = request.form.get('appointment_id')

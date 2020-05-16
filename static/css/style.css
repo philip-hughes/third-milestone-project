@@ -109,6 +109,7 @@ nav {
   margin-left: 2vw;
   width: 61vw;
   margin-bottom: 12px
+  margin-top: 3px;
 }
 
 @media(max-width:956px) {

@@ -107,8 +107,8 @@ nav {
 
 .calendar-container {
   margin-left: 2vw;
-  /*max-width: 61vw;*/
   width: 61vw;
+  margin-bottom: 12px
 }
 
 @media(max-width:956px) {

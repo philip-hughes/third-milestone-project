@@ -93,7 +93,7 @@ $("#select-doc").on("click",function(){
 })
 
 // Event handler for selecting a doctor via entry page divs
-$(".doc-wrapper").on("click",function(){
+$(".doc-container").on("click",function(){
     const doctorId = $(this).data("docid")
     changeDoctor(doctorId)
 })

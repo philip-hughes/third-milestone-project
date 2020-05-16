@@ -1,4 +1,8 @@
 /*********Entry page************************/
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
 .doc-entry-image {
   height: 300px;
   width: 220px;

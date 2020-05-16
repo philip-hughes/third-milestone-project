@@ -5,7 +5,6 @@
         <div class="doc-cal-name">{{ selected_doctor.name}}</div>
     </div>
     <div class="select-doc-wrapper">
-            <span>Doctor: </span>
             <select class="js-example-basic-single" name="doctor_id">
             {% for doctor in doctors %}
                {% if doctor._id == selected_doctor._id %}
@@ -24,10 +23,10 @@
         <div id="datepicker-close"><button class="sidebarCollapse">Close</button></div>
     </div>
      <div class="calendar-container" data-dayid={{ day_id }}>
-     <div id="selected-date"><span>{{ date }}</span></div>
      <button type="button" class="sidebarCollapse btn btn-info">
          <i class="far fa-calendar-alt"></i>
      </button>
+     <div id="selected-date"><span>{{ date }}</span></div>
         {% for hour in calendar %}
             <div class="row no-gutters hour-container">
                 <div class="hour"><div>{{hour.hour}}</div></div>

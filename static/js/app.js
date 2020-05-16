@@ -40,23 +40,24 @@ $(document).ready(function () {
 
 	$('#newAppointmentModal').on('show.bs.modal', function (event) {
 		const slot = $(event.relatedTarget); // Slot that triggered the modal
-		const time = slot.data('time');
+		const startTime = slot.data('time');
 		const modal = $(this);
-		modal.find('#startTime').val(time); // Add the selected slot time to the modal input
-		const otherSlots = $(".slot").map(function () {
+		modal.find('#startTime').val(startTime); // Add the selected slot time to the modal input
+
+		const allSubsequentSlots = $(".slot").map(function () {
 			const slotTime = $(this).data("time")
-			const base = new Date("1980-01-01 " + time);
-			const test = new Date("1980-01-01 " + slotTime);
-			if ((test >= base)) {
+			const startSlotTime = new Date("1980-01-01 " + startTime);
+			const otherSlotTime = new Date("1980-01-01 " + slotTime);
+			if ((otherSlotTime >= startSlotTime)) {
 				return this
 			}
 		})
 
-		const endTimeList = $("#endTime");
+		const endTimeList = $("#newApptEndTime");
 		endTimeList.empty()
-		for (i = 0; i < otherSlots.length; i++) {
-			const slotTime = $(otherSlots[i]).data("time")
-			const appointmentId = $(otherSlots[i]).data("id")
+		for (i = 0; i < allSubsequentSlots.length; i++) {
+			const slotTime = $(allSubsequentSlots[i]).data("time")
+			const appointmentId = $(allSubsequentSlots[i]).data("id")
 			if (!appointmentId) {
 				const displayTime = moment.utc(slotTime, 'HH:mm').add(15, 'minutes').format('HH:mm')
 				endTimeList.append(`<option value=${slotTime}>${displayTime}</option>`)
@@ -108,6 +109,10 @@ $(document).ready(function () {
 			location.href = `/calendar/${doctorId}`
 		}
 	}
+
+	function getAvailableSlotTimes(startTime){
+
+    }
 
 	function setDoctorId(doctorId) {
 		localStorage.setItem("selected_doctor_id", doctorId);

@@ -159,12 +159,5 @@ def delete_appointment():
     return redirect(f"/calendar/{doctor_id}/{date}")
 
 
-@app.route('/insert_patient', methods=["POST"])
-def insert_patient():
-    patients = mongo.db.patients
-    patients.insert_one(request.form.to_dict())
-    return redirect(url_for('index'))
-
-
 if __name__ == '__main__':
     app.run(debug=True)

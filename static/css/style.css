@@ -231,34 +231,24 @@ nav {
   width: 90px;
 }
 
-/*
-.nav-tabs {
-  border-bottom: 1px solid #dddddd;
-}
+/***********Overlay***********/
 
-.nav-tabs > li {
-  float: left;
-  margin-bottom: -1px;
+.overlay {
+    display: none;
+    position: fixed;
+    /* full screen */
+    width: 100vw;
+    height: 100vh;
+    /* transparent black */
+    background: rgba(0, 0, 0, 0.7);
+    /* middle layer, i.e. appears below the sidebar */
+    z-index: 998;
+    opacity: 0;
+    /* animate the transition */
+    transition: all 0.5s ease-in-out;
 }
-
-.nav-tabs > li > a {
-  margin-right: 2px;
-  line-height: 1.428571429;
-  border: 1px solid transparent;
-  border-radius: 4px 4px 0 0;
+/* display .overlay when it has the .active class */
+.overlay.active {
+    display: block;
+    opacity: 1;
 }
-
-.nav-tabs > li > a:hover {
-  border-color: #eeeeee #eeeeee #dddddd;
-}
-
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus {
-  color: #555555;
-  cursor: default;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  border-bottom-color: transparent;
-}
-*/

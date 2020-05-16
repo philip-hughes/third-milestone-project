@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% block content %}
+<div class="overlay"></div>
 <nav class="row no-gutters">
     <div class="doc-profile-wrapper">
         <img class="doc-cal-image" src={{ selected_doctor.profile_picture}}>
@@ -91,8 +92,8 @@
             </div>
             <div class="modal-new-patient">
                 <i class="fas fa-user-injured"></i>
-                <select class="js-example-basic-single" name="patient_id">
-                <option value="" disabled selected>Select patient</option>
+                <select class="js-example-basic-single required" name="patient_id">
+                <option value="" disabled="disabled" selected>Select patient</option>
                 {% for patient in patients %}
                 <option value={{patient._id}}>{{patient.name}}</option>
                 {% endfor %}

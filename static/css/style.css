@@ -28,6 +28,7 @@ h1 {
 
 .doc-entry-name {
   display: block;
+  text-align: center;
 }
 
 /*********Nav bar************************/

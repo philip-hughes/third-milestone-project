@@ -81,8 +81,7 @@ $(document).ready(function () {
 
 		modal.find('#day_id').val(dayId)
 		modal.find('#appointment_id').val(id)
-		modal.find('.modal-body #startTime').text(startTime);
-		modal.find('.modal-body #endTime').text(endTime); // Add the selected slot time to the modal input
+		modal.find('#startTime').val(startTime); // Add the selected slot time to the modal input
 	})
 
 	// Event handler for selecting a doctor via dropdown list

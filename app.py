@@ -23,12 +23,6 @@ def entry_page():
 @app.route('/calendar/<selected_doctor_id>')
 @app.route('/calendar/<selected_doctor_id>/<selected_date>')
 def calendar(selected_doctor_id=None, selected_date=None):
-   # if selected_date:
-     #   timestamp = int(selected_date)
-       # selected_date = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
-    #else:
-     #   selected_date = datetime.now().strftime("%d/%m/%Y")
-
     if selected_date is None:
        selected_date = datetime.now().strftime("%d-%m-%Y")
 
@@ -70,9 +64,7 @@ def build_calendar(selected_doctor, selected_date):
                                           })
             else:
                 appointment_times.append({"time": time, "empty": True})
-
         calendar.append({"hour": hour["hour"], "times": appointment_times})
-
     return calendar
 
 
@@ -165,12 +157,6 @@ def remove_appointment():
     mongo.db.appointments.delete_one({"_id": ObjectId(appointment_id)})
     mongo.db.days.update_one({"_id": ObjectId(day_id)}, {"$pull": {"appointment_ids": appointment_id}})
     return redirect(f"/calendar/{doctor_id}/{date}")
-
-
-@app.route('/addPatient')
-def addPatient():
-    doctors = mongo.db.doctors.find()
-    return render_template('addPatient.html', doctors=doctors)
 
 
 @app.route('/insert_patient', methods=["POST"])

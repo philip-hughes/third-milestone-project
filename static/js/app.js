@@ -91,7 +91,6 @@ $(document).ready(function () {
 	function changeDoctor(doctorId) {
 		setDoctorId(doctorId); // add doctor id to local storage
 		const selected_date = getSelectedDate()
-		console.log("selected date:" + selected_date)
 		if (selected_date) {
 			location.href = `/calendar/${doctorId}/${selected_date}`;
 		} else {
@@ -100,7 +99,6 @@ $(document).ready(function () {
 	}
 
 	function setAvailableSlotTimes(startTime, endTimeElement, currentAppointmentId = ""){
-	    console.log("Inside set slots")
 	    const allSubsequentSlots = $(".slot").map(function () {
 			const slotTime = $(this).data("time")
 			const startSlotTime = new Date("1980-01-01 " + startTime);
@@ -109,16 +107,13 @@ $(document).ready(function () {
 				return this
 			}
 		})
-        console.log(allSubsequentSlots)
         endTimeElement.empty()
 		for (i = 0; i < allSubsequentSlots.length; i++) {
 			const slotTime = $(allSubsequentSlots[i]).data("time")
 			const appointmentId = $(allSubsequentSlots[i]).data("id")
 			if (!appointmentId || (appointmentId == currentAppointmentId)) {
-				console.log("inside if")
 				const displayTime = moment.utc(slotTime, 'HH:mm').add(15, 'minutes').format('HH:mm')
 				endTimeElement.append(`<option value=${slotTime}>${displayTime}</option>`)
-
 			} else {
 				break;
 			}

@@ -94,7 +94,7 @@
                 <i class="fas fa-user-injured"></i>
                 <select class="js-example-basic-single required" name="patient_id">
                 {% for patient in patients %}
-                <option value={{patient._id}}>{{patient.name}}</option>
+                <option class="patient-option" value={{patient._id}}>{{patient.name}}</option>
                 {% endfor %}
                 </select>
             </div>
@@ -139,7 +139,7 @@
                 <i class="fas fa-user-injured"></i>
                 <select class="js-example-basic-single required" name="patient_id">
                 {% for patient in patients %}
-                <option value={{patient._id}}>{{patient.name}}</option>
+                <option class="patient-option" value={{patient._id}}>{{patient.name}}</option>
                 {% endfor %}
                 </select>
             </div>

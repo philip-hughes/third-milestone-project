@@ -24,7 +24,7 @@ def entry_page():
 @app.route('/calendar/<selected_doctor_id>/<selected_date>')
 def calendar(selected_doctor_id=None, selected_date=None):
     if selected_date is None:
-       selected_date = datetime.now().strftime("%d-%m-%Y")
+        selected_date = datetime.now().strftime("%d-%m-%Y")
 
     if selected_doctor_id:
         selected_doctor = mongo.db.doctors.find_one({"_id": ObjectId(selected_doctor_id)})
@@ -123,29 +123,35 @@ def insert_appointment():
     end_time = request.form.get('end_time')
     doctor_id = request.form.get('doctor_id')
     date = request.form.get('date')
+    patient_id = request.form.get('patient_id')
     appointment_id = mongo.db.appointments.insert_one({
         "doctor_id": doctor_id,
-        "patient_id": request.form.get('patient_id'),
+        "patient_id": patient_id,
         "first_slot": start_time,
         "last_slot": end_time
     }).inserted_id
 
     mongo.db.days.update_one({'date': date},
-                     {"$push": {"appointment_ids": str(appointment_id)}}
-                     )
+                             {"$push": {"appointment_ids": str(appointment_id)}}
+                             )
 
     return redirect(f"/calendar/{doctor_id}/{date}")
 
 
-@app.route("/updateAppointment", methods=["POST"])
+@app.route("/update_appointment", methods=["POST"])
 def update_appointment():
-    appointments = mongo.db.appointments
-    appointments.update({'_id': ObjectId(request.form.get('appointmentId'))},
-                        {"$push": {"appointment_list": {"doctor_id": selected_doctor["_id"],
-                                                        "type": "patient",
-                                                        "patient_id": request.form.get("patient_id")}}}
-                        )
-    return redirect(url_for('index'))
+    patient_id = request.form.get('patient_id')
+    appointment_id = request.form.get('appointment_id')
+    doctor_id = request.form.get('doctor_id')
+    last_slot = request.form.get('end_time')
+    mongo.db.appointments.update({'_id': ObjectId(appointment_id)},
+                                 {"$set": {
+                                     "patient_id": patient_id,
+                                     "last_slot": last_slot
+                                 }})
+
+    date = request.form.get('date')
+    return redirect(f"/calendar/{doctor_id}/{date}")
 
 
 @app.route("/remove_appointment", methods=["POST"])

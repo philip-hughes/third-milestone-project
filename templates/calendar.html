@@ -98,11 +98,12 @@
                 {% endfor %}
                 </select>
             </div>
+            <div class="modal-footer">
+               <button id="add-appointment" type="submit" name="action">Add appointment</button>
+            </div>
         </form>
       </div>
-      <div class="modal-footer">
-          <button id="add-appointment" type="submit" name="action">Add appointment</button>
-      </div>
+
     </div>
   </div>
 </div>
@@ -144,12 +145,13 @@
             <input class="modal-input" type="hidden" name="doctor_id" value={{ selected_doctor._id }}>
             <input class="modal-input" id="appointment_id" type="hidden" name="appointment_id" value>
             <input class="modal-input" id="day_id" type="hidden" name="day_id" value>
+            <div class="modal-footer ">
+                <button id="delete-button" formaction="{{ url_for('delete_appointment') }}" type="submit">Delete appointment</button>
+                <button id="update-button" formaction="{{ url_for('update_appointment') }}" type="submit">Update appointment</button>
+            </div>
           </form>
       </div>
-      <div class="modal-footer">
-          <button id="delete-button" formaction="{{ url_for('delete_appointment') }}" id="delete-appointment" type="submit" name="action">Delete appointment</button>
-          <button id="update-button" formaction="{{ url_for('update_appointment') }}" id="update-appointment" type="submit" name="action">Update appointment</button>
-      </div>
+
     </div>
   </div>
 </div>

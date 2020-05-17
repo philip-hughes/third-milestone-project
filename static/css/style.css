@@ -89,8 +89,14 @@ nav {
 
 #datepicker-close {
   width: 308px;
+  height: 32px;
   background-color: white;
   display: none; /* only displayed in screenwidths below 790px*/
+}
+
+#datepicker-close button {
+    position: absolute;
+    right: 5px;
 }
 
 /*********Sidebar**************/

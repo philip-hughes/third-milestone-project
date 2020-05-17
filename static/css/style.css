@@ -276,6 +276,9 @@ select {
 #add-appointment, #update-button {
     background-color: #7074dd;
     color: white;
+}
+
+#delete-button, #add-appointment, #update-button {
     border: none;
     border-radius: 2px;
 }

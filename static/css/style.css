@@ -48,6 +48,11 @@ nav {
     top: 15px;
 }
 
+.select-doc-wrapper select {
+    border: none;
+    outline: none;
+}
+
 .select-doc-wrapper button {
   border: none;
   background-color: #dceded;

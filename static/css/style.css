@@ -279,7 +279,7 @@ select {
   width: 90px;
 }
 
-.modal-doctor, .modal-date, .modal-time {
+.modal-doctor, .modal-date, .modal-time, .modal-edit-patient, .modal-new-patient {
     margin-bottom: 2px;
 }
 

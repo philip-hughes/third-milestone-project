@@ -272,6 +272,13 @@ nav {
 .modal-title {
     font-weight: bold;
 }
+
+#add-appointment, #update-button {
+    background-color: #7074dd;
+    color: white;
+    border: none;
+    border-radius: 2px;
+}
 /***********Overlay***********/
 
 .overlay {

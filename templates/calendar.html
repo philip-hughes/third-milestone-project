@@ -138,7 +138,6 @@
             <div class="modal-edit-patient">
                 <i class="fas fa-user-injured"></i>
                 <select class="js-example-basic-single required" name="patient_id">
-                <option value="" disabled="disabled" selected>Select patient</option>
                 {% for patient in patients %}
                 <option value={{patient._id}}>{{patient.name}}</option>
                 {% endfor %}

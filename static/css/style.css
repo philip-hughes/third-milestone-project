@@ -261,11 +261,6 @@ select {
   outline: none;
 }
 
-.modal select:hover {
-  background-color: lightblue;
-  border-radius: 2px;
-}
-
 .modal-date #date {
   width: 90px;
 }

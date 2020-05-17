@@ -265,6 +265,9 @@ nav {
   width: 90px;
 }
 
+.modal-doctor, .modal-date, .modal-time {
+    margin-bottom: 2px;
+}
 /***********Overlay***********/
 
 .overlay {

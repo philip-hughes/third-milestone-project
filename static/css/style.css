@@ -268,6 +268,10 @@ nav {
 .modal-doctor, .modal-date, .modal-time {
     margin-bottom: 2px;
 }
+
+.modal-title {
+    font-weight: bold;
+}
 /***********Overlay***********/
 
 .overlay {

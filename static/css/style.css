@@ -88,8 +88,10 @@ nav {
 }
 
 #datepicker-close {
-  width: 308px;
+  width: 311px;
   height: 32px;
+  border-bottom-right-radius:5px;
+  border-bottom-left-radius:5px;
   background-color: white;
   display: none; /* only displayed in screenwidths below 790px*/
 }
@@ -97,6 +99,12 @@ nav {
 #datepicker-close button {
     position: absolute;
     right: 5px;
+}
+
+.flatpickr-calendar.inline {
+    width: 311px;
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius:0px;
 }
 
 /*********Sidebar**************/

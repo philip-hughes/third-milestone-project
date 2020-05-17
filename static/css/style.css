@@ -99,6 +99,8 @@ nav {
 #datepicker-close button {
     position: absolute;
     right: 5px;
+    border: none;
+    background-color: #e8ebeb;
 }
 
 .flatpickr-calendar.inline {
@@ -165,7 +167,6 @@ nav {
 
 .hour-container {
     height: 100px;
-
 }
 
 .hour {

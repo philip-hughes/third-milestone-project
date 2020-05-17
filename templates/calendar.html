@@ -39,20 +39,20 @@
                     </div>
                     {% else %}
                         {% if time.first_time == True and time.last_time == True %}
-                            <div class="row no-gutters slot only-time" data-id={{ time.appointment_id }} data-start={{ time.start_time }} data-end={{ time.end_time }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
+                            <div class="row no-gutters slot only-time" data-id={{ time.appointment_id }} data-start={{ time.start_time }} data-end={{ time.end_time }} data-time={{ time.time }} data-patientid={{ time.patient_id }} data-toggle="modal" data-target="#editAppointmentModal">
                                 <span class="slot-time">{{time.time}}</span>
                         	    <span class="patient-name">{{time.patient_name}}</span>
                             </div>
                         {% elif time.first_time == True %}
-                            <div class="row no-gutters slot first-time"  data-id={{ time.appointment_id }} data-start={{ time.start_time }} data-end={{ time.end_time }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
+                            <div class="row no-gutters slot first-time"  data-id={{ time.appointment_id }} data-start={{ time.start_time }} data-end={{ time.end_time }} data-time={{ time.time }} data-patientid={{ time.patient_id }} data-toggle="modal" data-target="#editAppointmentModal">
                                 <span class="slot-time">{{time.time}}</span>
                         	    <span class="patient-name">{{time.patient_name}}</span>
                             </div>
                         {% elif time.last_time == True %}
-                            <div class="row no-gutters slot last-time" data-id={{ time.appointment_id }} data-start={{ time.start_time }} data-end={{ time.end_time }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
+                            <div class="row no-gutters slot last-time" data-id={{ time.appointment_id }} data-start={{ time.start_time }} data-end={{ time.end_time }} data-time={{ time.time }} data-patientid={{ time.patient_id }} data-toggle="modal" data-target="#editAppointmentModal">
                             </div>
                         {% else %}
-                            <div class="row no-gutters slot middle-time" data-id={{ time.appointment_id }} data-start={{ time.start_time }} data-end={{ time.end_time }} data-time={{ time.time }} data-toggle="modal" data-target="#editAppointmentModal">
+                            <div class="row no-gutters slot middle-time" data-id={{ time.appointment_id }} data-start={{ time.start_time }} data-end={{ time.end_time }} data-time={{ time.time }} data-patientid={{ time.patient_id }} data-toggle="modal" data-target="#editAppointmentModal">
                             </div>
                         {% endif %}
                     {% endif %}
@@ -93,7 +93,6 @@
             <div class="modal-new-patient">
                 <i class="fas fa-user-injured"></i>
                 <select class="js-example-basic-single required" name="patient_id">
-                <option value="" disabled="disabled" selected>Select patient</option>
                 {% for patient in patients %}
                 <option value={{patient._id}}>{{patient.name}}</option>
                 {% endfor %}

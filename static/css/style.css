@@ -244,6 +244,15 @@ nav {
 
 /*********Modals**************/
 
+.modal-header {
+    background-color: #8186e3;
+    color: #f8f4f4;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
 select {
    background-color: #faf7f7;
 }
@@ -272,10 +281,6 @@ select {
 
 .modal-doctor, .modal-date, .modal-time {
     margin-bottom: 2px;
-}
-
-.modal-title {
-    font-weight: bold;
 }
 
 #add-appointment, #update-button {

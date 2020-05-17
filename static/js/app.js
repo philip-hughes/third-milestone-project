@@ -43,28 +43,8 @@ $(document).ready(function () {
 		const startTime = slot.data('time');
 		const modal = $(this);
 		modal.find('#startTime').val(startTime); // Add the selected slot time to the modal input
-
-		const allSubsequentSlots = $(".slot").map(function () {
-			const slotTime = $(this).data("time")
-			const startSlotTime = new Date("1980-01-01 " + startTime);
-			const otherSlotTime = new Date("1980-01-01 " + slotTime);
-			if ((otherSlotTime >= startSlotTime)) {
-				return this
-			}
-		})
-
-		const endTimeList = $("#newApptEndTime");
-		endTimeList.empty()
-		for (i = 0; i < allSubsequentSlots.length; i++) {
-			const slotTime = $(allSubsequentSlots[i]).data("time")
-			const appointmentId = $(allSubsequentSlots[i]).data("id")
-			if (!appointmentId) {
-				const displayTime = moment.utc(slotTime, 'HH:mm').add(15, 'minutes').format('HH:mm')
-				endTimeList.append(`<option value=${slotTime}>${displayTime}</option>`)
-			} else {
-				break;
-			}
-		}
+        const endTimeElement = $("#newApptEndTime");
+        setAvailableSlotTimes(startTime,endTimeElement);
 	})
 
 	$('#add-appointment').on('click', function () {
@@ -110,8 +90,26 @@ $(document).ready(function () {
 		}
 	}
 
-	function getAvailableSlotTimes(startTime){
-
+	function setAvailableSlotTimes(startTime, endTimeElement){
+	    const allSubsequentSlots = $(".slot").map(function () {
+			const slotTime = $(this).data("time")
+			const startSlotTime = new Date("1980-01-01 " + startTime);
+			const otherSlotTime = new Date("1980-01-01 " + slotTime);
+			if ((otherSlotTime >= startSlotTime)) {
+				return this
+			}
+		})
+        endTimeElement.empty()
+		for (i = 0; i < allSubsequentSlots.length; i++) {
+			const slotTime = $(allSubsequentSlots[i]).data("time")
+			const appointmentId = $(allSubsequentSlots[i]).data("id")
+			if (!appointmentId) {
+				const displayTime = moment.utc(slotTime, 'HH:mm').add(15, 'minutes').format('HH:mm')
+				endTimeElement.append(`<option value=${slotTime}>${displayTime}</option>`)
+			} else {
+				break;
+			}
+		}
     }
 
 	function setDoctorId(doctorId) {

@@ -40,6 +40,7 @@ $(document).ready(function () {
 
     // New appointment modal
 	$('#newAppointmentModal').on('show.bs.modal', function (event) {
+		$('.patient-option').removeAttr('selected', 'selected')
 		const slot = $(event.relatedTarget); // Slot that triggered the modal
 		const startTime = slot.data('time');
 		const modal = $(this);
@@ -67,8 +68,6 @@ $(document).ready(function () {
 		const currentPatientId = slot.data('patientid');
 		$('.patient-option').removeAttr('selected', 'selected')
 		$(`[value=${currentPatientId}]`).attr('selected', 'selected')
-
-
 	})
 
 

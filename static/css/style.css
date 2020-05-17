@@ -238,6 +238,11 @@ nav {
 }
 
 /*********Modals**************/
+
+select {
+   background-color: #faf7f7;
+}
+
 .modal-input {
   border: none;
   outline: none;

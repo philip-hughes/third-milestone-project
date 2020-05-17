@@ -52,7 +52,6 @@ $(document).ready(function () {
     // Edit appointment setAvailableSlotTimes(startTime,endTimeElement);modal
 	$('#editAppointmentModal').on('show.bs.modal', function (event) {
 		const slot = $(event.relatedTarget); // Slot that triggered the modal
-		//console.startlog($(slot).children('.patient-name').innerText())
         const modal = $(this);
 		const startTime = slot.data('start');
 		const endTimeElement = $("#editApptEndTime");
@@ -65,6 +64,11 @@ $(document).ready(function () {
 		modal.find('#day_id').val(dayId)
 		modal.find('#appointment_id').val(currentAppointmentId)
 		modal.find('#startTime').val(startTime); // Add the selected slot time to the modal input
+		const currentPatientId = slot.data('patientid');
+		$('.patient-option').removeAttr('selected', 'selected')
+		$(`[value=${currentPatientId}]`).attr('selected', 'selected')
+
+
 	})
 
 

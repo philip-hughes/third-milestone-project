@@ -127,6 +127,7 @@ nav {
 
 .sidebarCollapse {
   display: none;
+  margin-bottom: 5px;
 }
 
 /*********Appointments grid**************/

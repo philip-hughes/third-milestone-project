@@ -38,32 +38,41 @@ $(document).ready(function () {
 		}
 	})
 
+    // New appointment modal
 	$('#newAppointmentModal').on('show.bs.modal', function (event) {
 		const slot = $(event.relatedTarget); // Slot that triggered the modal
 		const startTime = slot.data('time');
 		const modal = $(this);
-		modal.find('#startTime').val(startTime); // Add the selected slot time to the modal input
         const endTimeElement = $("#newApptEndTime");
         setAvailableSlotTimes(startTime,endTimeElement);
+
+        modal.find('#startTime').val(startTime); // Add the selected slot time to the modal input
 	})
 
-	$('#add-appointment').on('click', function () {
-		console.log("Test")
-	})
-
+    // Edit appointment setAvailableSlotTimes(startTime,endTimeElement);modal
 	$('#editAppointmentModal').on('show.bs.modal', function (event) {
 		const slot = $(event.relatedTarget); // Slot that triggered the modal
-		//console.log($(slot).children('.patient-name').innerText())
+		//console.startlog($(slot).children('.patient-name').innerText())
+        const modal = $(this);
 		const startTime = slot.data('start');
+		const endTimeElement = $("#editApptEndTime");
+		const currentAppointmentId = slot.data('id')
+		setAvailableSlotTimes(startTime,endTimeElement, currentAppointmentId);
 		const endTime = moment.utc(slot.data('end'), 'HH:mm').add(15, 'minutes').format('HH:mm')
-		const modal = $(this);
-		const id = slot.data('id')
+
+
 		const dayId = $(".calendar-container").data('dayid')
 
 		modal.find('#day_id').val(dayId)
-		modal.find('#appointment_id').val(id)
+		modal.find('#appointment_id').val(currentAppointmentId)
 		modal.find('#startTime').val(startTime); // Add the selected slot time to the modal input
 	})
+
+
+	/*$('#add-appointment').on('click', function () {
+		console.log("Test")
+	})*/
+
 
 	// Event handler for selecting a doctor via dropdown list
 	$("#select-doc").on("click", function () {
@@ -90,7 +99,8 @@ $(document).ready(function () {
 		}
 	}
 
-	function setAvailableSlotTimes(startTime, endTimeElement){
+	function setAvailableSlotTimes(startTime, endTimeElement, currentAppointmentId = ""){
+	    console.log("Inside set slots")
 	    const allSubsequentSlots = $(".slot").map(function () {
 			const slotTime = $(this).data("time")
 			const startSlotTime = new Date("1980-01-01 " + startTime);
@@ -99,13 +109,16 @@ $(document).ready(function () {
 				return this
 			}
 		})
+        console.log(allSubsequentSlots)
         endTimeElement.empty()
 		for (i = 0; i < allSubsequentSlots.length; i++) {
 			const slotTime = $(allSubsequentSlots[i]).data("time")
 			const appointmentId = $(allSubsequentSlots[i]).data("id")
-			if (!appointmentId) {
+			if (!appointmentId || (appointmentId == currentAppointmentId)) {
+				console.log("inside if")
 				const displayTime = moment.utc(slotTime, 'HH:mm').add(15, 'minutes').format('HH:mm')
 				endTimeElement.append(`<option value=${slotTime}>${displayTime}</option>`)
+
 			} else {
 				break;
 			}

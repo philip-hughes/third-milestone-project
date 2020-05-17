@@ -56,11 +56,10 @@ $(document).ready(function () {
         const modal = $(this);
 		const startTime = slot.data('start');
 		const endTimeElement = $("#editApptEndTime");
-		const currentAppointmentId = slot.data('id')
-		setAvailableSlotTimes(startTime,endTimeElement, currentAppointmentId);
-		const endTime = moment.utc(slot.data('end'), 'HH:mm').add(15, 'minutes').format('HH:mm')
-
-
+		const currentAppointmentId = slot.data('id');
+		const currentEndTime = slot.data('end');
+		setAvailableSlotTimes(startTime,endTimeElement, currentAppointmentId, currentEndTime);
+		const endTime = moment.utc(currentEndTime, 'HH:mm').add(15, 'minutes').format('HH:mm');
 		const dayId = $(".calendar-container").data('dayid')
 
 		modal.find('#day_id').val(dayId)
@@ -98,7 +97,7 @@ $(document).ready(function () {
 		}
 	}
 
-	function setAvailableSlotTimes(startTime, endTimeElement, currentAppointmentId = ""){
+	function setAvailableSlotTimes(startTime, endTimeElement, currentAppointmentId = "", currentEndTime = ""){
 	    const allSubsequentSlots = $(".slot").map(function () {
 			const slotTime = $(this).data("time")
 			const startSlotTime = new Date("1980-01-01 " + startTime);
@@ -113,7 +112,11 @@ $(document).ready(function () {
 			const appointmentId = $(allSubsequentSlots[i]).data("id")
 			if (!appointmentId || (appointmentId == currentAppointmentId)) {
 				const displayTime = moment.utc(slotTime, 'HH:mm').add(15, 'minutes').format('HH:mm')
-				endTimeElement.append(`<option value=${slotTime}>${displayTime}</option>`)
+				if(slotTime == currentEndTime){
+					endTimeElement.append(`<option selected value=${slotTime}>${displayTime}</option>`)
+				}else{
+					endTimeElement.append(`<option value=${slotTime}>${displayTime}</option>`)
+				}
 			} else {
 				break;
 			}

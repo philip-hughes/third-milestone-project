@@ -4,7 +4,7 @@
 {% for doctor in doctors %}
     <div class="doc-container col-12 col-md-6 col-lg-4 col-xl-3" data-docid={{ doctor._id }}>
         <div class="doc-wrapper">
-            <img class="doc-entry-image" src={{ doctor.profile_picture }}>
+            <img class="doc-entry-image" src={{ doctor.profile_picture }}  alt="Doctor_profile_image">
             <span class="doc-entry-name">{{doctor.name}}</span>
         </div>
     </div>

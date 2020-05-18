@@ -158,18 +158,35 @@ was used for responsive breakpoint testing.
 
 ## Deployment
 
-This website was deployed to github pages with the following steps.  The version deployed on github pages is the final version.
-1. Go to the repository root directory at https://github.com/philiph80/second-milestone-project
-2. Click on Settings and scroll down to the GitHub Pages section.
-3. Open the Source drop down menu and select 'master branch'. The Settings page will reload.
-4. Scroll back down to the GitHub Pages section and you should see a blue message stating that "Your site is ready to be published", followed by a link to the site.
-5. Wait a couple of minutes until the message turns green and the site is published.
-6. Click on the link and then append index.html to the URL to view the site. e.g. https://philiph80.github.io/second-milestone-project/index.html
+This website was deployed an Heroku server with the following steps.  The version deployed on Heroku is the final version.
+1. Go to https://www.heroku.com/ where you'll be presented with a page where you can log in or sign up.
+2. Click sign up and complete the form and sign up for the free account
+3. Complete the email verification and password steps
+4. Login to Heroku and choose the option to create a new app.
+5. Give the app a name, select a region and create.
+6. If you dont already have Heroku installed locally, you can install using the steps here - https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+7. Once Heroku is installed, open your IDE terminal and run 'heroku login', and fill out the required fields.
+8. Go back to the Heroku dashboard in your browser, and click on the Settings link for your app. From here
+   you can get the Heroku git URL. e.g. https://git.heroku.com/doctor-docs.git
+9. Go back to the IDE terminal and run 'git add remote heroku https://git.heroku.com/doctor-docs.git'.
+10. Next, install Gunicorn which will be used to as part of the deployment. You can install with the
+    following command 'pip3 install gunicorn' 
+11. Next create a requirements.txt file with the following command 'pip3 freeze --local > requirements.txt'
+12. Commit the requirements.txt file to your local git repository.
+13. Add a Procfile with the following command 'echo web: gunicorn app:app > Procfile'
+14. Push the application to Heroku with 'push -u origin master' 
+15. Run the application with heroku ps:scale web=1
+16. Check the application is running at http://doctor-docs.herokuapp.com/
+16. If there are any issues with the deployment you can check files and logs with following commands:
+    heroku run bash -a doctor-docs
+    heroku logs -n 200
+    heroku logs --tail   
+   
 
-If you want to run the site locally you need to download the site files from Github and host it on a HTTP server.
-1. To download the site files, go to https://philiph80.github.io/second-milestone-project/, then click the Clone or Download button and select Download Zip.
-2. Extract the downloaded zip and run the index.html file from your HTTP server. If you dont already have a HTTP server installed I recommend you use the Python server which
-is very easy and quick to install.  There are clear steps to install the Python server available here — https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server
+If you want to run the site locally you need to download the site files from Github and host it on a Python server.
+1. To download the site files, go to https://philiph80.github.io/third-milestone-project/, then click the Clone or Download button and select Download Zip.
+2. Extract the downloaded zip and run the app.py file from your python server e.g. If you dont already have a Python server installed there are clear and easy
+  steps to install a Python server here https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server
 
 ## Credits
 

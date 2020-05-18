@@ -4,11 +4,11 @@ This project website is an appointment scheduling application designed for use i
 application is to allow the clinic administrators to schedule appointments for the various doctors who work in the clinic, and to allow 
 the doctors to view their appointments.  
 
-To schedule an appointment, the app user must first choose a doctor
+The site comprises 2 web pages, is fully responsive and can be viewed in desktop, tablet and mobile devices. The calendar screen in the desktop
+and tablet views will show the appointments table and datepicker by default. However in the mobile view, the datepicker is hidden by default and can be viewed
+clicking on the calendar icon button, which is only displayed in mobile view.
 
-
-The site comprises 3 web pages and can be viewed in desktop, tablet and mobile devices.
-
+Appointments can also be edited or removed via the Appointment details modal which will be displayed if an existing appointment slot is clicked.
 
 ## UX
 

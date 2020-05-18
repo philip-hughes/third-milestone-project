@@ -40,24 +40,21 @@ Wire frames can be found in root directory of the project repository.
 
 ## Features
 
-### Existing Features — All screens
-- **Home icon** - This is a font awesome icon displayed on the left of the header that links to the homepage when clicked
-- **Search bar** - An input box with placeholder text prompting users to Search Movies
-- **The Footer** - the footer section contains Follow Us text and social media links.
+### Existing Features — Entry screen
+- **Bootstrap grid of doctor profile cards** - Bootstrap grid layout is used here to display the doctor cards.  The number of cards displayed per row will adjust
+    depending on the screenwidth.  Card size will remain the same however.
+### Existing Features — Calendar screen
+- **Doctor avatar** - An avatar displaying an image of the currently selected doctor with the doctor name
+- **Select doctor dropdown** - A dropdown input that displays the currently selected doctor as the first option.
+- **Datepicker** - A flatpickr datepicker which is used to change the date for which appointments can be made and are displayed.
+- **Appointments table** - A table of appointment slots.  Each hour has four slots of 15minutes. However, appointments are not limited to
+    one 15minute slot.
+- **New appointment modal** - A modal that is displayed when an empty slot is clicked. Modal displays doctor name, date, start time, and there 
+     select dropdowns to choose the end time and patient name.  The Add appointment is used to submit the form.    
+- **Edit appointment modal** - A modal that is displayed when clicking on an existing appointment. Modal displays doctor name, date, start time, and there 
+     select dropdowns to choose the end time and patient name.  The currently end time and patient name are displayed initially but can be changed. Changes
+     are submitted using the Update Appointment button. The appointment can be removed using the Delete button.    
 
-### Existing Features — Home screen
-- **In Theaters carousel** - A Slick js carousel that displays movie posters and ratings returned from the Get Now Playing API call.
-- **Coming Soon carousel** - A Slick js carousel that displays movie posters from the Get Upcoming API call.
-
-### Existing Features — Search results screen
-- **Search results** - A grid of cards displaying the movie poster, movie rating, title and release year that are returned from the Get Search Movies API call.
-
-### Existing Features — Movie details screen
-- **Movie info and poster** - Movie info and poster retrieved from the Get Details and Get Credits API calls.
-- **Submit rating** - A component that allows users to submit a rating for the movie by selecting a number of stars and clicking the Submit button. The user must
- choose at least 1 star. The confirmation message will either confirm the rating submission or inform the user that they have already
- rated that particular movie.  The rating is submitted using the POST Rate Movie API call which takes the guest session id and rating value
- as parameters.
 
 
 ## Technologies Used

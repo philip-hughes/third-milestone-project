@@ -21,11 +21,21 @@ I wanted were
  2. Option to easily switch the selected doctor
  3. A datepicker to select the date for which appointments are made and displayed.
 
+I had also considered adding options to add a new patient or doctor, but due to time constraints and the fact that
+the project requirements of create, read, update and delete were already met, I decided to leave them out and spend
+time on implementing the sidebar toggle feature instead.
 
-I had also considered
+After deciding on the main project features I agreed with my mentor that the general layout, appointment flow and modals should be similar to the google
+calendar web application, which has a fairly standard appointment scheduling flow and would be familiar to a lot of
+users, thus making my application more intuitive. 
 
+We then decided on the DB structure which comprises the following collections
+1. The doctor collection: This contains two string fields - 'name' and 'profile_picture'.
+2. The patients collection: This contains one string field = 'name'
+3. The appointments collection: This contains four string fields - 'doctor_id', 'patient_id', 'first_slot' and 'last_slot'.
+4. The days collection: This contains a string field - 'date', and an array of 'appointment_ids'
 
-Wire frames can be found in root directory of the project repository.
+After agreeing on the features, layout and DB structure I created the project wire frames which can be found in root directory of the project repository.
 
 
 ## Features

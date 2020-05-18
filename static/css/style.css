@@ -275,7 +275,7 @@ select {
   outline: none;
 }
 
-.modal-date #date {
+.date {
   width: 90px;
 }
 

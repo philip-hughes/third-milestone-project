@@ -20,20 +20,10 @@ I wanted were
  1. Option to add and remove appointments for a particular doctor
  2. Option to easily switch the selected doctor
  3. A datepicker to select the date for which appointments are made and displayed.
-The availability of POST rating option was the main factor in my decision to use The Movie Database API, as it was the only API i could find that had this service available.
+
 
 I had also considered
 
-After selecting the API I wrote some basic proof of concept code to verify the API was giving me what i wanted, and that there were no major issues with it. I then
-went about designing the basic layout of the site, and writing the wire frames. The use of a carousel on the home page was a suggestion from my project mentor during our
-first project meeting. I'd considered a carousel on the search-results screen also, but decided against it for the following reasons:
- 1. If there are many results returned its easier to find what you're looking for in a list as opposed to a carousel.
- 2. I wanted there to be a clear distinction in layout on each screen, partly for variety, and also so that a user knows exactly where they are on the site.
-Note that the search-results page in the wire frames shows a scroll able list of movies.  I changed this to a grid of cards after a suggestion from my project mentor during our second meeting.
-
-Note also that there is a minor issue with the movies returned by the GET Upcoming API call.  Many of the movies in this response have release dates that are in the past, which of course isn't what
-you'd expect for a Coming Soon movie.  I had considered filtering these movies out of the carousel, but I discussed it my mentor, and we agreed that i should leave it as is, as in some cases the filtered
-list could result very small list, or possibly no 'Coming Soon movies' at all.
 
 Wire frames can be found in root directory of the project repository.
 
@@ -54,8 +44,9 @@ Wire frames can be found in root directory of the project repository.
 - **Edit appointment modal** - A modal that is displayed when clicking on an existing appointment. Modal displays doctor name, date, start time, and there 
      select dropdowns to choose the end time and patient name.  The currently end time and patient name are displayed initially but can be changed. Changes
      are submitted using the Update Appointment button. The appointment can be removed using the Delete button.    
-
-
+### Existing Features — Calendar screen mobile view
+- **Calendar button and sidebar** - In screens below 799px, the datepicker is hidden and calendar toggle button is displayed which allows users to open the
+    datepicker sidebar. When clicked the datepicker will be displayed, and an overlay is displayed over the rest of the page content.  
 
 ## Technologies Used
 

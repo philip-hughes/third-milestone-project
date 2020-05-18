@@ -63,15 +63,21 @@ Wire frames can be found in root directory of the project repository.
 ## Technologies Used
 
 — [Bootstrap](https://getbootstrap.com/)
- — Bootstrap was used for the site layout.
+ — Bootstrap was used for the site layout and the datepicker sidebar.
 
 — [JQuery](https://jquery.com)
- — Jquery is used throughout the project for writing elements to the DOM.
+ — Jquery is used throughout the project in conjunction with plain javascript for writing to the DOM and local
+   storage.
 
 — [Font Awesome](https://fontawesome.com/)
- — Font Awesome icons were used for 
+ — Font Awesome icons were used for the calendar toggle button, and for the modal form fields.
 
+— [Flatpickr](https://flatpickr.js.org/)
+ — The datepicker is from the free and open source Flatpickr library.
 
+— [Select2](https://select2.org)
+ — I used the Select2 libraries for the patient dropdown so as you can search the list by typing the
+   name of the patient.
 
 
 ## Testing
@@ -191,13 +197,12 @@ If you want to run the site locally you need to download the site files from Git
 ## Credits
 
 ### Content
-— All movie info displayed is retrieved from the The Movie Database API.
-
-### Media
-— All images are supplied The Movie Database API, with the exception of the default image that's used in the carousels and search results.
+— The doctor profile images were found through a google image search and are hosted locally.
 
 ### Acknowledgments
 
-— The box shadow CSS used for the search-results cards was taken from an example on the w3schools site. I liked
- the way it looked, and didn't see any reason to change it, so I left it as is.  All other code in this project is my own work.
+— The box shadow CSS used for the doctor cards on the entry page was taken from an example on the w3schools site. I liked
+ the way it looked, and didn't see any reason to change it, so I left it as is. 
   https://www.w3schools.com/howto/howto_css_cards.asp
+— The datepicker sidebar was implemented using steps from this site - https://bootstrapious.com/p/bootstrap-sidebar
+- All other work is my own.

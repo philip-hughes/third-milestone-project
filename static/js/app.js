@@ -47,7 +47,7 @@ $(document).ready(function () {
         const endTimeElement = $("#newApptEndTime");
         setAvailableSlotTimes(startTime,endTimeElement);
 
-        modal.find('#startTime').val(startTime); // Add the selected slot time to the modal input
+        modal.find('.start-time').val(startTime); // Add the selected slot time to the modal input
 	})
 
     // Edit appointment setAvailableSlotTimes(startTime,endTimeElement);modal
@@ -58,23 +58,17 @@ $(document).ready(function () {
 		const endTimeElement = $("#editApptEndTime");
 		const currentAppointmentId = slot.data('id');
 		const currentEndTime = slot.data('end');
-		setAvailableSlotTimes(startTime,endTimeElement, currentAppointmentId, currentEndTime);
+		setAvailableSlotTimes(startTime, endTimeElement, currentAppointmentId, currentEndTime);
 		const endTime = moment.utc(currentEndTime, 'HH:mm').add(15, 'minutes').format('HH:mm');
 		const dayId = $(".calendar-container").data('dayid')
 
 		modal.find('#day_id').val(dayId)
 		modal.find('#appointment_id').val(currentAppointmentId)
-		modal.find('#startTime').val(startTime); // Add the selected slot time to the modal input
+		modal.find('.start-time').val(startTime); // Add the selected slot time to the modal input
 		const currentPatientId = slot.data('patientid');
 		$('.patient-option').removeAttr('selected', 'selected')
 		$(`[value=${currentPatientId}]`).attr('selected', 'selected')
 	})
-
-
-	/*$('#add-appointment').on('click', function () {
-		console.log("Test")
-	})*/
-
 
 	// Event handler for selecting a doctor via dropdown list
 	$("#select-doc").on("click", function () {
@@ -88,7 +82,6 @@ $(document).ready(function () {
 		const doctorId = $(this).data("docid")
 		changeDoctor(doctorId)
 	})
-
 
 	function changeDoctor(doctorId) {
 		setDoctorId(doctorId); // add doctor id to local storage

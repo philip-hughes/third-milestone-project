@@ -266,7 +266,7 @@ select {
   display: block;
 }
 
-#startTime {
+.start-time {
   width: 40px;
 }
 

@@ -10,7 +10,7 @@ clicking on the calendar icon button, which is only displayed in mobile view.
 
 Appointments can also be edited or removed via the Appointment details modal which will be displayed if an existing appointment slot is clicked.
 
-The project is running at - http://doctor-docs.herokuapp.com/
+The project is running at: http://doctor-docs.herokuapp.com/
 
 ## UX
 

@@ -5,7 +5,7 @@ application is to allow the clinic administrators to schedule appointments for t
 the doctors to view their appointments.  
 
 The site comprises 2 web pages, is fully responsive and can be viewed in desktop, tablet and mobile devices. The calendar screen in the desktop
-and tablet views will show the appointments table and datepicker by default. However in the mobile view, the datepicker is hidden by default and can be viewed
+and tablet views will show the appointments table and date picker by default. However in the mobile view, the datepicker is hidden by default and can be viewed
 clicking on the calendar icon button, which is only displayed in mobile view.
 
 Appointments can also be edited or removed via the Appointment details modal which will be displayed if an existing appointment slot is clicked.
@@ -14,7 +14,7 @@ The project is running at - http://doctor-docs.herokuapp.com/
 
 ## UX
 
-The purpose of this site is to enable a clinic administrator to schedule or remove an appointment for the selected doctor, and to allow the doctor
+The purpose of this site is to enable a clinic admin to schedule or remove an appointment for the selected doctor, and to allow the doctor
 to view those same appointments.
 
 At the beginning of the project I listed the features that were a must for the site, and features that were nice to have. The core features
